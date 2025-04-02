@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "socrates-portfolio",
   "private": true,
   "scripts": {
     "build": "turbo run build",

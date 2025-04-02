@@ -17,11 +17,11 @@
     ".": "./src/index.ts"
   },
   "devDependencies": {
-    "prisma": "^6.5.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "eslint": "^8.57.0",
-    "rimraf": "^5.0.5",
+    "eslint": "^9.23.0",
+    "prisma": "latest",
+    "rimraf": "^6.0.1",
     "tsup": "^8.0.2",
     "tsx": "4.19.1",
     "typescript": "5.5.4"

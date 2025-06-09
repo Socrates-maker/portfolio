@@ -129,16 +129,10 @@ exports.Prisma.ProjetScalarFieldEnum = {
   title: 'title',
   description: 'description',
   url: 'url',
+  coverImage: 'coverImage',
+  images: 'images',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  isDeleted: 'isDeleted'
-};
-
-exports.Prisma.FileScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  url: 'url',
-  projectId: 'projectId',
   isDeleted: 'isDeleted'
 };
 
@@ -160,8 +154,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Projet: 'Projet',
-  File: 'File'
+  Projet: 'Projet'
 };
 
 /**

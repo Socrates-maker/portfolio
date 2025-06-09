@@ -23,17 +23,9 @@ model Projet {
   title       String
   description String
   url         String?
-  images      File[]
+  coverImage  String
+  images      String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   isDeleted   Boolean  @default(false)
-}
-
-model File {
-  id        String  @id @default(cuid())
-  name      String
-  url       String
-  project   Projet  @relation(fields: [projectId], references: [id])
-  projectId String
-  isDeleted Boolean @default(false)
 }

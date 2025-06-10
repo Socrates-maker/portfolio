@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { Aside } from "@/ui/components/organisms/aside";
+import { Aside } from "@/components/organisms/aside";
+import React from "react";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,14 +39,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} h-[100vh] dark:bg-neutral-900`}
       >
-        <div className="h-full grid grid-cols-[20%_80%]  mx-auto font-inter ">
-          <Aside />
-          <div className="dark:bg-neutral-800">{children}</div>
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SidebarProvider>
+            <Aside />
+            <main className="w-full">
+              <SidebarTrigger />
+              {children}
+            </main>
+          </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

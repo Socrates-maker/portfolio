@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Input, InputProps } from "@/ui/components/atoms/input/input";
+import { Input, InputProps } from "@/components/atoms/input/input";
 import Image from "next/image";
+import { ArrowUpFromLine } from "lucide-react";
+import { FormLabel } from "@/components/ui/form";
 
 type Props = InputProps & {
   label: string;
@@ -61,23 +63,15 @@ export const FileInput = ({
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex gap-3">
+    <div className="flex flex-col ">
+      <div className="flex gap-3 ">
         <label
           htmlFor={props.id}
           className="w-[max-content] flex flex-col gap-3"
         >
-          <div className="font-semibold">{label}</div>
+          <FormLabel className="font-semibold">{label}</FormLabel>
           <div className="border-1 border-neutral-600 rounded w-[100px] h-[90px] grid place-items-center cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="30px"
-              viewBox="0 -960 960 960"
-              width="30px"
-              fill="#EFEFEF"
-            >
-              <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
-            </svg>
+            <ArrowUpFromLine />
             <span className="text-sm">
               {!props.multiple && fileUrls && fileUrls.length > 0
                 ? "Change file"

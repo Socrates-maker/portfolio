@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "@/ui/components/atoms/input/input";
+import { Input } from "@/components/atoms/input/input";
 
 type Props = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,

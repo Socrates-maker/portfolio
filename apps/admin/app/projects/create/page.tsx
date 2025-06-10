@@ -1,11 +1,15 @@
-import { Heading } from "@/ui/components/atoms/heading/heading";
-import { ProjectForm } from "@/ui/components/organisms/forms/projectForm";
+import { ProjectForm } from "@/components/organisms/forms/projectForm";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function CreateProjectPage() {
   return (
-    <div className="p-5">
-      <Heading title="Create Project" />
-      <ProjectForm />
-    </div>
+    <Card className="mx-5">
+      <CardHeader>
+        <CardTitle>Create Project</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ProjectForm />
+      </CardContent>
+    </Card>
   );
 }

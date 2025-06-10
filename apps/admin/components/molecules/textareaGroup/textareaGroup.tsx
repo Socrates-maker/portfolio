@@ -1,5 +1,5 @@
 import React from "react";
-import { Textarea } from "@/ui/components/atoms/textarea/textarea";
+import { Textarea } from "@/components/atoms/textarea/textarea";
 
 type Props = React.DetailedHTMLProps<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,

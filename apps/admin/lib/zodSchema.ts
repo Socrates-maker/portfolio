@@ -16,3 +16,15 @@ export const FileSchema = z.object({
       { message: "Only png, jpg, jpeg files are allowed" },
     ),
 });
+
+export const CreateProjectFormSchema = z.object({
+  title: z.string({ required_error: "This field is required" }),
+  description: z.string({ required_error: "This field is required" }),
+  url: z
+    .string({ required_error: "This field is required" })
+    .url({ message: "Invalid URL" }),
+  coverImage: z
+    .string({ required_error: "Image url is required" })
+    .url({ message: "Invalid URL" }),
+  images: z.array(z.string().url({ message: "Invalid Url" })).optional(),
+});

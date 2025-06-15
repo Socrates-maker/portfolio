@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} h-[100vh] dark:bg-neutral-900`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

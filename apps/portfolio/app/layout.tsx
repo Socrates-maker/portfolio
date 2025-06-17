@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppHeader } from "@/components/app-header";
+import { Footer } from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,10 +42,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="container  mx-auto md:px-10 bg-background text-foreground max-w-5xl ">
+          <div className="container  mx-auto md:px-10  max-w-5xl ">
             <AppHeader />
             <div className=" px-5 ">{children}</div>
           </div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

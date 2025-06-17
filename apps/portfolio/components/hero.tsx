@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const Hero = () => {
   return (
-    <div className="flex flex-col items-center md:items-start md:flex-row   justify-around gap-5 ">
+    <section className="flex flex-col items-center md:items-start md:flex-row   justify-around gap-5 ">
       <div className="md:pt-2 px-2 flex-[2]   space-y-3 ">
         <div className="text-center md:text-left">
           <h2 className="text-[40px] md:text-5xl font-anek  font-bold tracking-tight ">
@@ -29,6 +29,6 @@ export const Hero = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

@@ -7,7 +7,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class ProjectsService {
   constructor(private readonly prisma: PrismaService) {}
   create(createProjectDto: CreateProjectDto) {
-    return 'This action adds a new project';
+    return this.prisma.projet.create({ data: createProjectDto });
   }
 
   findAll() {

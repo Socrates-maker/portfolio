@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { ProjectEntity } from './entities/project.entity';
 
 @Injectable()
 export class ProjectsService {
@@ -10,19 +11,43 @@ export class ProjectsService {
     return this.prisma.projet.create({ data: createProjectDto });
   }
 
-  findAll() {
-    return this.prisma.projet.findMany();
+  async findAll(): Promise<ProjectEntity[]> {
+    const projects = await this.prisma.projet.findMany({
+      where: { isDeleted: false },
+    });
+    return projects.map((project) => new ProjectEntity(project));
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} project`;
+  async findOne(id: string) {
+    const dbProject = await this.prisma.projet.findUnique({
+      where: { id },
+    });
+    if (!dbProject) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+    return new ProjectEntity(dbProject);
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  async update(id: string, updateProjectDto: UpdateProjectDto) {
+    const dbProject = await this.prisma.projet.findUnique({ where: { id } });
+    if (!dbProject) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+    return await this.prisma.projet.update({
+      where: { id },
+      data: updateProjectDto,
+    });
   }
 
-  remove(id: number) {
+  async remove(id: string) {
+    const dbProject = await this.prisma.projet.findUnique({ where: { id } });
+    if (!dbProject) {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+    await this.prisma.projet.update({
+      where: { id },
+      data: { ...dbProject, isDeleted: true },
+    });
     return `This action removes a #${id} project`;
   }
 }

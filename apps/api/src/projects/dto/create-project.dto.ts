@@ -1,4 +1,10 @@
-import { IsArray, IsNotEmpty, IsString, IsUrl } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProjectDto {
@@ -33,5 +39,6 @@ export class CreateProjectDto {
   @ApiProperty()
   @IsArray()
   @IsString({ each: true })
+  @IsOptional()
   images: string[];
 }

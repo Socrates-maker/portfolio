@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { Aside } from "@/components/organisms/aside";
-import React from "react";
+import React, { Suspense } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { NextTopLoader } from "@/components/next-top-loader";
+import { Toaster } from "@/components/ui/sonner";
+import { ServerToaster } from "@/lib/server-toast/server-toast.server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +46,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} bg-background text-foreground`}
       >
+        <NextTopLoader />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -56,6 +60,10 @@ export default function RootLayout({
               {children}
             </main>
           </SidebarProvider>
+          <Toaster />
+          <Suspense>
+            <ServerToaster />
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

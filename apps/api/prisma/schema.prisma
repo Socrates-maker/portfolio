@@ -28,3 +28,13 @@ model Projet {
   updatedAt   DateTime @updatedAt
   isDeleted   Boolean  @default(false)
 }
+
+model Work {
+  id          String    @id @default(cuid())
+  companyName String
+  role        String
+  beginDate   DateTime
+  endDate     DateTime?
+  image       String
+  isDeleted   Boolean   @default(false)
+}

@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { IContact } from "@/lib/interface";
 
-export const ContactCard = () => {
+export const ContactCard = ({ contact }: { contact: IContact }) => {
+  console.log(contact);
   return (
     <Card className="bg-accent/10 flex flex-row gap-3 items-center hover:bg-accent/50 transition-colors px-2 py-3 m-0  cursor-pointer">
       <div className="relative">
@@ -16,8 +18,8 @@ export const ContactCard = () => {
         </div>
         <div className="size-[30px] absolute -right-2 -bottom-2  rounded-[50%]">
           <Image
-            src="/images/linkedin-logo.webp"
-            alt="Project image"
+            src={contact?.logo}
+            alt={contact?.name}
             className="object-cover rounded-[50%]"
             fill
           />
@@ -25,9 +27,9 @@ export const ContactCard = () => {
       </div>
       <div className="flex flex-col ">
         <h3 className="text-lg  font-anek font-semibold text-muted-foreground">
-          Lindin
+          {contact?.name}
         </h3>
-        <p className="text-muted-foreground text-sm ">Lorem</p>
+        <p className="text-muted-foreground text-sm "></p>
       </div>
       <div className="ml-auto text-muted-foreground">
         <ArrowUpRight size={16} />

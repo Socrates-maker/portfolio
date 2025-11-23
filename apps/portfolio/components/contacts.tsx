@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { ContactCard } from "@/components/contact-card";
+import { contacts } from "@/lib/data";
 
 export const Contacts = () => {
   return (
@@ -9,9 +10,9 @@ export const Contacts = () => {
         I will be happy to work with you
       </h2>
       <div className="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 mt-8">
-        <ContactCard />
-        <ContactCard />
-        <ContactCard />
+        {contacts.map((contact, index) => (
+          <ContactCard key={index} contact={contact} />
+        ))}
       </div>
     </section>
   );

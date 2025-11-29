@@ -136,6 +136,29 @@ exports.Prisma.ProjetScalarFieldEnum = {
   isDeleted: 'isDeleted'
 };
 
+exports.Prisma.SkillScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  logo: 'logo',
+  logoDark: 'logoDark',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
+};
+
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  logo: 'logo',
+  logoDark: 'logoDark',
+  image: 'image',
+  url: 'url',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -154,7 +177,9 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Projet: 'Projet'
+  Projet: 'Projet',
+  Skill: 'Skill',
+  Contact: 'Contact'
 };
 
 /**

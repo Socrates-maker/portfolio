@@ -1,6 +1,6 @@
 import React, { SVGProps } from "react";
 
-export const NextSvgIcon = ({
+export const NextSvgLogo = ({
   height,
   width,
   viewBox,
@@ -25,8 +25,8 @@ export const NextSvgIcon = ({
         y2="96.0801119%"
         id="nextjsLinearGradient-3"
       >
-        <stop stop-color="#FFFFFF" offset="0%"></stop>
-        <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        <stop stopColor="#FFFFFF" offset="0%"></stop>
+        <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%"></stop>
       </linearGradient>
       <linearGradient
         x1="50%"
@@ -35,13 +35,13 @@ export const NextSvgIcon = ({
         y2="73.4375%"
         id="nextjsLinearGradient-4"
       >
-        <stop stop-color="#FFFFFF" offset="0%"></stop>
-        <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        <stop stopColor="#FFFFFF" offset="0%"></stop>
+        <stop stopColor="#FFFFFF" stopOpacity="0" offset="100%"></stop>
       </linearGradient>
     </defs>
     <g>
       <mask id="mask-2" fill="white">
-        <use></use>
+        <use href="#path-1"></use>
       </mask>
       <g mask="url(#mask-2)">
         <circle fill="#000000" cx="128" cy="128" r="128"></circle>

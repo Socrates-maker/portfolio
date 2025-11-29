@@ -6,7 +6,7 @@ import { Contacts } from "@/components/contacts";
 export default function Home() {
   return (
     <>
-      <div className="h-25"></div>
+      <div className="md:h-25"></div>
       <Hero />
       <div className="h-25"></div>
       <StatusSection />

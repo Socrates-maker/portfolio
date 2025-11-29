@@ -4,6 +4,7 @@ import { Input, InputProps } from "@/components/atoms/input/input";
 import Image from "next/image";
 import { ArrowUpFromLine } from "lucide-react";
 import { FormLabel } from "@/components/ui/form";
+import { FILE_UPLOAD_URL } from "@/lib/consts";
 
 type Props = InputProps & {
   label: string;
@@ -45,7 +46,7 @@ export const FileInput = ({
 
   const uploadFile = async (formData: FormData) => {
     setFileLoading(true);
-    const response = await fetch("http://localhost:3000/api/cloudinary", {
+    const response = await fetch(FILE_UPLOAD_URL, {
       method: "POST",
       body: formData,
     });

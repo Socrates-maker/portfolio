@@ -1,8 +1,9 @@
 "use server";
-import { prisma } from "@repo/database";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { CreateProjectFormSchema } from "@/lib/zodSchema";
+import { apiRoutes } from "@/lib/consts";
+import { serverToast } from "@/lib/server-toast/server-toast";
 
 export type CreateProjectFormState = {
   data?: {
@@ -45,18 +46,22 @@ export const createProjectAction = async (
     };
   }
 
-  try {
-    await prisma.projet.create({
-      data: {
-        ...validatedFields.data,
-      },
-    });
-  } catch (e) {
-    console.log(e);
+  const response = await fetch(apiRoutes.projects, {
+    method: "POST",
+    body: JSON.stringify(validatedFields.data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    console.error(error);
     return {
-      message: "Database error. Failed to create project",
+      message: error.message,
     };
   }
+  //toast("Created");
+  await serverToast("Project created successfully", "success");
   revalidatePath("/projects");
   redirect("/projects");
 };

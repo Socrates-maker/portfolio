@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { ReactSvgLogo } from "@/components/icons/react-svg-logo";
 import { skills } from "@/lib/data";
 import { ISkill } from "@/lib/interface";
 

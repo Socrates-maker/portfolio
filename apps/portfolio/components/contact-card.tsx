@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { IContact } from "@/lib/interface";
 
 export const ContactCard = ({ contact }: { contact: IContact }) => {
-  console.log(contact);
   return (
     <Card className="bg-accent/10 flex flex-row gap-3 items-center hover:bg-accent/50 transition-colors px-2 py-3 m-0  cursor-pointer">
       <div className="relative">

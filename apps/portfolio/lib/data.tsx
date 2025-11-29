@@ -2,6 +2,10 @@ import { IContact, IProject, ISkill, IWork } from "@/lib/interface";
 import { ReactSvgLogo } from "@/components/icons/react-svg-logo";
 import { NextSvgLogo } from "@/components/icons/next-svg-logo";
 import { NestSvgLogo } from "@/components/icons/nest-svg-logo";
+import { AngularSvgLogo } from "@/components/icons/angular-svg-logo";
+import { DockerSvgLogo } from "@/components/icons/docker-svg-logo";
+import { GitlabSvgLogo } from "@/components/icons/gitlab-svg-logo";
+import { TailwindSvgLogo } from "@/components/icons/tailwind-svg-logo";
 
 export const projects: IProject[] = [
   {
@@ -79,5 +83,27 @@ export const skills: ISkill[] = [
     description:
       "A progressive Node.js framework for building efficient, reliable and scalable server-side applications.",
     icon: <NestSvgLogo />,
+  },
+  {
+    name: "Angular",
+    description: "The framework for building scalable web apps with confidence",
+    icon: <AngularSvgLogo />,
+  },
+  {
+    name: "Docker",
+    description:
+      "Docker is an open platform for developing, shipping, and running applications.",
+    icon: <DockerSvgLogo />,
+  },
+  {
+    name: "Gitlab ci/cd",
+    description: "Ship secure software, faster",
+    icon: <GitlabSvgLogo />,
+  },
+  {
+    name: "Tailwind",
+    description:
+      "Rapidly build modern websites without ever leaving your HTML.",
+    icon: <TailwindSvgLogo />,
   },
 ];

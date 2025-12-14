@@ -3,6 +3,18 @@ import { ContactCard } from "@/components/contact-card";
 import { contacts, projects, works } from "@/lib/data";
 import { SideProject } from "@/components/side-project";
 import { Work } from "@/components/work";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { IProject } from "@/lib/interface";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 export const StatusSection = () => {
   return (
@@ -13,7 +25,12 @@ export const StatusSection = () => {
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
           {projects.map((project, index) => (
-            <SideProject project={project} key={index} />
+            <Dialog key={index}>
+              <DialogTrigger asChild>
+                <SideProject project={project} />
+              </DialogTrigger>
+              <ProjectDetailModal project={project} />
+            </Dialog>
           ))}
         </CardContent>
       </Card>
@@ -22,9 +39,10 @@ export const StatusSection = () => {
           <CardHeader>
             <CardTitle className="text-muted-foreground">Experience</CardTitle>
           </CardHeader>
+
           <CardContent className="flex flex-col gap-2">
             {works.map((work, index) => (
-              <Work key={index} work={work} />
+              <Work work={work} key={index} />
             ))}
           </CardContent>
         </Card>
@@ -40,5 +58,24 @@ export const StatusSection = () => {
         </Card>
       </div>
     </div>
+  );
+};
+
+const ProjectDetailModal = ({ project }: { project: IProject }) => {
+  return (
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>{project.name}</DialogTitle>
+        <DialogDescription>{project.description}</DialogDescription>
+      </DialogHeader>
+
+      {project.url && (
+        <Button asChild size="icon">
+          <Link href={project.url} target="_blank">
+            <ExternalLink />
+          </Link>
+        </Button>
+      )}
+    </DialogContent>
   );
 };

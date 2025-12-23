@@ -55,13 +55,13 @@ export const works: IWork[] = [
 export const contacts: IContact[] = [
   {
     name: "Linkedin",
-    url: "",
+    url: "https://www.linkedin.com/in/socrates-ekpaliguidime-4b728119a",
     logo: "/images/linkedin-logo.webp",
     description: "",
   },
   {
     name: "X",
-    url: "",
+    url: "https://x.com/ekpaliguidime",
     logo: "/images/x-logo.jpg",
     description: "",
   },

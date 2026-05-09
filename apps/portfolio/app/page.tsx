@@ -1,20 +1,21 @@
 import { Hero } from "@/components/hero";
-import { StatusSection } from "@/components/status-section";
+import { Projects } from "@/components/projects";
+import { Experience } from "@/components/experience";
 import { Skills } from "@/components/skills";
-import { Contacts } from "@/components/contacts";
+import { Contact } from "@/components/contact";
 
 export default function Home() {
   return (
     <>
-      <div className="md:h-25"></div>
       <Hero />
-      <div className="h-25"></div>
-      <StatusSection />
-      <div className="h-25"></div>
+      <div className="section-y" />
+      <Projects />
+      <div className="section-y" />
+      <Experience />
+      <div className="section-y" />
       <Skills />
-      <div className="h-25"></div>
-      <Contacts />
-      <div className="h-25"></div>
+      <div className="section-y" />
+      <Contact />
     </>
   );
 }

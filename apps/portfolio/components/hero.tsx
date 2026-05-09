@@ -1,39 +1,69 @@
-import Image from "next/image";
+"use client";
 
-export const Hero = () => {
+import Image from "next/image";
+import { useLang } from "@/components/lang-provider";
+
+export function Hero() {
+  const { data } = useLang();
+
   return (
-    <section className="flex flex-col-reverse items-center md:items-start md:flex-row   justify-around gap-5 ">
-      <div className="md:pt-2 px-2 flex-[2]   space-y-3 ">
-        <div className="text-center md:text-left">
-          <h2 className="text-[40px] md:text-5xl font-anek  font-bold tracking-tight ">
-            Socrates Ekpaliguidime
-          </h2>
-          <h3 className=" text-2xl md:text-3xl text-muted-foreground">
-            Software developer
-          </h3>
+    <section className="hero col-w" id="top">
+      <div className="hero-grid">
+        {/* Hero content is above the fold — animate via CSS keyframe, no scroll reveal needed */}
+        <div className="hero-left hero-enter">
+          <div className="hero-eyebrow">
+            <span className="live-dot" aria-hidden="true" />
+            <span className="eyebrow">{data.header.availability}</span>
+            <span style={{ color: "var(--fg-soft)" }}>·</span>
+            <span className="eyebrow">{data.hero.eyebrow}</span>
+          </div>
+
+          <h1 className="hero-name">
+            <span className="first">{data.hero.nameFirst}</span>
+            <span className="last">{data.hero.nameLast}</span>
+          </h1>
+
+          <p className="hero-role">
+            {data.hero.role}
+            <em>{data.hero.roleAccent}</em>
+          </p>
+
+          <p className="hero-bio">{data.hero.bio}</p>
+
+          <div className="hero-meta">
+            <span>{data.hero.footnote}</span>
+          </div>
+
+          <div className="hero-ctas">
+            <a href="#contact" className="btn btn-primary">
+              {data.hero.ctaPrimary}
+              <span className="btn-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+            <a href="#work" className="btn btn-ghost">
+              {data.hero.ctaSecondary}
+              <span className="btn-arrow" aria-hidden="true">
+                ↓
+              </span>
+            </a>
+          </div>
         </div>
 
-        <p className="text-justify text-muted-foreground px-1">
-          I’m a developer passionate about learning and building. With a strong
-          foundation in physics and software engineering, I love designing
-          efficient systems—from backend APIs to frontend interfaces. I
-          currently work in a startup in Bénin, where I help turn ideas into
-          real digital products.I build reliable web applications using
-          React,Next, Nest, and modern DevOps tools. I enjoy designing clean
-          architectures, automating workflows (CI/CD), and contributing to
-          impactful products within fast-moving startups.
-        </p>
-      </div>
-      <div className="flex-[1] flex justify-center">
-        <div className="relative size-[300px] rounded-[50%] bg-card">
-          <Image
-            src="/images/soc.jpeg"
-            alt="socrates image"
-            fill
-            className="rounded-[50%] object-cover"
-          />
+        <div className="hero-right hero-enter" style={{ animationDelay: "80ms" }}>
+          <div className="portrait">
+            <Image
+              src="/images/soc.jpeg"
+              alt={`${data.hero.nameFirst} ${data.hero.nameLast}`}
+              fill
+              priority
+              sizes="(max-width: 880px) 100vw, 480px"
+              style={{ objectFit: "cover" }}
+            />
+            <div className="portrait-frame" aria-hidden="true" />
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}

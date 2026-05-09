@@ -1,33 +1,38 @@
-import { Badge } from "@/components/ui/badge";
-import { skills } from "@/lib/data";
-import { ISkill } from "@/lib/interface";
+"use client";
 
-export const Skills = () => {
+import { useLang } from "@/components/lang-provider";
+import { Reveal, RevealList } from "@/components/reveal";
+
+export function Skills() {
+  const { data } = useLang();
+
   return (
-    <section>
-      <Badge variant="outline">Skills</Badge>
-      <h2 className="scroll-m-20  pb-2 text-3xl text-muted-foreground font-semibold tracking-tight first:mt-0 my-4">
-        I love working on ...
-      </h2>
-      <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 mt-8">
-        {skills.map((skill, index) => (
-          <Skill key={index} skill={skill} />
+    <section className="col-w" id="skills">
+      <Reveal as="div" className="sec-head">
+        <div>
+          <span className="eyebrow">{data.sections.skillsKicker}</span>
+          <h2 className="title" style={{ marginTop: 12 }}>
+            {data.sections.skillsTitle}
+          </h2>
+        </div>
+        <p className="intro">{data.sections.skillsIntro}</p>
+      </Reveal>
+
+      <RevealList className="skills-grid" staggerMs={80}>
+        {data.skillGroups.map((group) => (
+          <div key={group.label}>
+            <div className="skill-group-label">{group.label}</div>
+            <div className="skill-list">
+              {group.items.map((item) => (
+                <div key={item} className="skill-item">
+                  <span>{item}</span>
+                  <span className="arrow">→</span>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
-      </div>
+      </RevealList>
     </section>
   );
-};
-
-const Skill = ({ skill }: { skill: ISkill }) => {
-  return (
-    <div>
-      <div className="flex justify-center  items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-        {skill.icon}
-      </div>
-      <h3 className="mb-2 text-xl text-muted-foreground font-semibold">
-        {skill.name}
-      </h3>
-      <p className="text-muted-foreground">{skill.description}</p>
-    </div>
-  );
-};
+}

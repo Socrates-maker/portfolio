@@ -1,31 +1,35 @@
 import type { Metadata } from "next";
-import { Newsreader, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Zilla_Slab, Public_Sans, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import React from "react";
+import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LangProvider } from "@/components/lang-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { InkFilters } from "@/components/ink-filters";
+import { Lang } from "@/lib/portfolio-data";
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const LANG_COOKIE = "portfolio.lang";
+
+const zillaSlab = Zilla_Slab({
+  variable: "--font-zilla-slab",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const courierPrime = Courier_Prime({
+  variable: "--font-courier-prime",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -35,23 +39,28 @@ export const metadata: Metadata = {
     "Portfolio of Socrates Ekpaliguidime — full-stack software developer based in Cotonou, Benin.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const cookieLang = cookieStore.get(LANG_COOKIE)?.value;
+  const initialLang: Lang = cookieLang === "fr" ? "fr" : "en";
+
   return (
-    <html lang="en" data-theme="light" suppressHydrationWarning>
+    <html lang={initialLang} data-theme="light" suppressHydrationWarning>
       <body
-        className={`${newsreader.variable} ${dmSans.variable} ${jetBrainsMono.variable}`}
+        className={`${zillaSlab.variable} ${publicSans.variable} ${courierPrime.variable}`}
       >
+        <InkFilters />
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >
-          <LangProvider>
+          <LangProvider initialLang={initialLang}>
             <SiteHeader />
             <main>{children}</main>
             <SiteFooter />

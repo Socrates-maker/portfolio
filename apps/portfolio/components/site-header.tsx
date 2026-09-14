@@ -8,37 +8,36 @@ export function SiteHeader() {
   const { data, toggleLang } = useLang();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
   const isDark = mounted && resolvedTheme === "dark";
   const ui = data.ui;
 
+  const navLinks = [
+    { href: "#work", label: data.nav.work },
+    { href: "#experience", label: data.nav.experience },
+    { href: "#skills", label: data.nav.skills },
+    { href: "#contact", label: data.nav.contact },
+  ];
+
   return (
     <header className="site-header">
       <div className="inner">
         <a href="#top" className="brand">
-          <span className="brand-dot" aria-hidden="true" />
+          <span className="brand-seal" aria-hidden="true">
+            {data.hero.nameFirst.charAt(0)}
+          </span>
           <span>{data.header.brandShort}</span>
         </a>
 
         <nav className="nav" aria-label="Primary">
-          <a href="#work">
-            <span className="num">01</span>
-            {data.nav.work}
-          </a>
-          <a href="#experience">
-            <span className="num">02</span>
-            {data.nav.experience}
-          </a>
-          <a href="#skills">
-            <span className="num">03</span>
-            {data.nav.skills}
-          </a>
-          <a href="#contact">
-            <span className="num">04</span>
-            {data.nav.contact}
-          </a>
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
         </nav>
 
         <div className="toolbar">
@@ -48,9 +47,9 @@ export function SiteHeader() {
             onClick={toggleLang}
             aria-label="Switch language"
           >
-            <span style={{ color: "var(--fg)" }}>{ui.lang}</span>
-            <span style={{ color: "var(--fg-soft)" }}>/</span>
-            <span style={{ color: "var(--fg-soft)" }}>{ui.langSwitch}</span>
+            <span style={{ color: "var(--on-cover)" }}>{ui.lang}</span>
+            <span style={{ color: "var(--gold-on-cover)" }}>/</span>
+            <span style={{ color: "color-mix(in oklab, var(--on-cover) 55%, transparent)" }}>{ui.langSwitch}</span>
           </button>
           <button
             type="button"
@@ -76,8 +75,53 @@ export function SiteHeader() {
               </svg>
             )}
           </button>
+          <button
+            type="button"
+            className="tb-btn icon menu-toggle"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+          >
+            {mobileOpen ? (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.6}
+                strokeLinecap="round"
+              >
+                <path d="M5 5l14 14M19 5L5 19" />
+              </svg>
+            ) : (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.6}
+                strokeLinecap="round"
+              >
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            )}
+          </button>
         </div>
       </div>
+
+      <nav
+        id="mobile-nav"
+        aria-label="Primary mobile"
+        className="mobile-nav"
+        data-open={mobileOpen}
+      >
+        <div className="mobile-nav-inner">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </nav>
     </header>
   );
 }

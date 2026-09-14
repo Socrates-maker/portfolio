@@ -12,17 +12,21 @@ type LangContextValue = {
 
 const LangContext = createContext<LangContextValue | null>(null);
 
-const STORAGE_KEY = "portfolio.lang";
+const COOKIE_KEY = "portfolio.lang";
 
-export function LangProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
-
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored === "fr" || stored === "en") setLangState(stored);
-    } catch {}
-  }, []);
+/**
+ * initialLang comes from the "portfolio.lang" cookie, read server-side in
+ * layout.tsx, so the first client render already matches what the server
+ * sent — no post-mount flash from a default language to the stored one.
+ */
+export function LangProvider({
+  children,
+  initialLang = "en",
+}: {
+  children: React.ReactNode;
+  initialLang?: Lang;
+}) {
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -35,7 +39,7 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
   const setLang = useCallback((next: Lang) => {
     setLangState(next);
     try {
-      window.localStorage.setItem(STORAGE_KEY, next);
+      document.cookie = `${COOKIE_KEY}=${next}; path=/; max-age=31536000; samesite=lax`;
     } catch {}
   }, []);
 

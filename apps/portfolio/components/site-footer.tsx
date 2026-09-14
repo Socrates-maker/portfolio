@@ -6,9 +6,8 @@ export function SiteFooter() {
   const { data } = useLang();
   return (
     <footer className="site-footer">
-      <div className="flex justify-center">
+      <div className="inner">
         <span>{data.footer.copy}</span>
-        {/*  <span>{data.footer.builtWith}</span>*/}
       </div>
     </footer>
   );

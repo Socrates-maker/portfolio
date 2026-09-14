@@ -2,6 +2,7 @@
 
 import { useLang } from "@/components/lang-provider";
 import { Reveal } from "@/components/reveal";
+import { ExternalArrowIcon } from "@/components/icons/arrow-icon";
 
 export function Contact() {
   const { data } = useLang();
@@ -10,8 +11,7 @@ export function Contact() {
     <section className="contact" id="contact">
       <div className="contact-inner">
         <Reveal as="div">
-          <span className="eyebrow">{data.sections.contactKicker}</span>
-          <h2 className="contact-title" style={{ marginTop: 18 }}>
+          <h2 className="contact-title">
             {renderContactTitle(data.sections.contactTitle)}
           </h2>
         </Reveal>
@@ -22,12 +22,12 @@ export function Contact() {
             <a className="contact-email" href={`mailto:${data.contact.email}`}>
               <span>{data.contact.email}</span>
               <span className="arrow" aria-hidden="true">
-                ↗
+                <ExternalArrowIcon />
               </span>
             </a>
           </div>
 
-          <div className="socials">
+          <div className="signature-line">
             {data.contact.socials.map((s) => (
               <a
                 key={s.label}
@@ -36,10 +36,12 @@ export function Contact() {
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                <span className="social-label">{s.label}</span>
-                <span className="row-h">
-                  <span className="social-handle">{s.handle}</span>
-                  <span style={{ color: "var(--fg-soft)" }}>↗</span>
+                <span className="social-row-inner">
+                  <span className="social-label">{s.label}</span>
+                  <span className="row-h">
+                    <span className="social-handle">{s.handle}</span>
+                    <ExternalArrowIcon />
+                  </span>
                 </span>
               </a>
             ))}

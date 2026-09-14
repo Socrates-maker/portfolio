@@ -50,10 +50,13 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-right hero-enter" style={{ animationDelay: "80ms" }}>
+        <div
+          className="hero-right hero-enter"
+          style={{ animationDelay: "80ms" }}
+        >
           <div className="portrait">
             <Image
-              src="/images/soc.jpeg"
+              src="/images/soc1.jpeg"
               alt={`${data.hero.nameFirst} ${data.hero.nameLast}`}
               fill
               priority

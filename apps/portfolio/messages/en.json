@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "title": "Socrates Ekpaliguidime — Software developer",
+    "description": "Portfolio of Socrates Ekpaliguidime — full-stack software developer based in Cotonou, Benin."
+  },
+  "nav": {
+    "work": "Work",
+    "experience": "Experience",
+    "skills": "Stack",
+    "contact": "Contact"
+  },
+  "header": {
+    "availability": "Available for work · 2026"
+  },
+  "hero": {
+    "eyebrow": "Cotonou, Benin",
+    "role": "Software developer",
+    "roleAccent": "full-stack",
+    "bio": "I build reliable web applications with React, Next.js and NestJS. I help startups turn ideas into real digital products — from API design to interfaces, with automated deployments along the way.",
+    "footnote": "Applied physics → software engineering.",
+    "ctaPrimary": "Get in touch",
+    "ctaSecondary": "See projects",
+    "photoCaption": "Photo · 2025"
+  },
+  "sections": {
+    "workTitle": "Recent work",
+    "workIntro": "A few products I've been lucky to ship in the past few years.",
+    "experienceTitle": "Where I've built",
+    "skillsTitle": "What I work with",
+    "skillsIntro": "Not an exhaustive list — what I use day to day, with confidence.",
+    "contactTitle": "Want to build something together?",
+    "contactBody": "Open to full-stack contracts, technical consulting, or just a chat about a product idea. I usually reply within 24h."
+  },
+  "footer": {
+    "copy": "© 2026 Socrates Ekpaliguidime"
+  },
+  "ui": {
+    "visitSite": "Visit live site",
+    "fieldName": "Name",
+    "fieldProfession": "Profession",
+    "fieldLocation": "Location",
+    "fieldRemarks": "Remarks",
+    "fieldPriorField": "Prior field",
+    "entryLabel": "Entry"
+  }
+}

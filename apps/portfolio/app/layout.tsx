@@ -2,15 +2,10 @@ import type { Metadata } from "next";
 import { Zilla_Slab, Public_Sans, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import { cookies } from "next/headers";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
-import { LangProvider } from "@/components/lang-provider";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
 import { InkFilters } from "@/components/ink-filters";
-import { Lang } from "@/lib/portfolio-data";
-
-const LANG_COOKIE = "portfolio.lang";
 
 const zillaSlab = Zilla_Slab({
   variable: "--font-zilla-slab",
@@ -33,39 +28,38 @@ const courierPrime = Courier_Prime({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Socrates Ekpaliguidime — Software developer",
-  description:
-    "Portfolio of Socrates Ekpaliguidime — full-stack software developer based in Cotonou, Benin.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const cookieLang = cookieStore.get(LANG_COOKIE)?.value;
-  const initialLang: Lang = cookieLang === "fr" ? "fr" : "en";
+  const locale = await getLocale();
+  const messages = await getMessages();
 
   return (
-    <html lang={initialLang} data-theme="light" suppressHydrationWarning>
+    <html lang={locale} data-theme="light" suppressHydrationWarning>
       <body
         className={`${zillaSlab.variable} ${publicSans.variable} ${courierPrime.variable} paper-grid bg-bg text-fg font-sans text-base leading-[1.55] antialiased [text-rendering:optimizeLegibility] transition-colors duration-[350ms]`}
       >
         <InkFilters />
-        <ThemeProvider
-          attribute="data-theme"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <LangProvider initialLang={initialLang}>
-            <SiteHeader />
-            <main>{children}</main>
-            <SiteFooter />
-          </LangProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ThemeProvider
+            attribute="data-theme"
+            defaultTheme="light"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

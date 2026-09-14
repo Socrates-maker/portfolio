@@ -2,13 +2,18 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useLang } from "@/components/lang-provider";
+import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { LANG_COOKIE, type Locale } from "@/lib/locale";
+import { SITE } from "@/lib/site";
 
 const TB_BTN =
   "appearance-none bg-transparent border border-on-cover/30 text-on-cover h-8 px-2.5 rounded-[3px] font-mono text-[11px] leading-none tracking-[0.04em] uppercase cursor-pointer inline-flex items-center gap-1.5 transition-colors hover:bg-gold-on-cover/16 hover:border-gold-on-cover focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-on-cover focus-visible:outline-offset-2 max-phone:h-10 max-phone:px-2";
 
 export function SiteHeader() {
-  const { data, toggleLang } = useLang();
+  const t = useTranslations();
+  const locale = useLocale() as Locale;
+  const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -16,13 +21,18 @@ export function SiteHeader() {
   useEffect(() => setMounted(true), []);
 
   const isDark = mounted && resolvedTheme === "dark";
-  const ui = data.ui;
+  const otherLocale: Locale = locale === "fr" ? "en" : "fr";
+
+  const toggleLang = () => {
+    document.cookie = `${LANG_COOKIE}=${otherLocale}; path=/; max-age=31536000; samesite=lax`;
+    router.refresh();
+  };
 
   const navLinks = [
-    { href: "#work", label: data.nav.work },
-    { href: "#experience", label: data.nav.experience },
-    { href: "#skills", label: data.nav.skills },
-    { href: "#contact", label: data.nav.contact },
+    { href: "#work", label: t("nav.work") },
+    { href: "#experience", label: t("nav.experience") },
+    { href: "#skills", label: t("nav.skills") },
+    { href: "#contact", label: t("nav.contact") },
   ];
 
   return (
@@ -36,9 +46,9 @@ export function SiteHeader() {
             className="w-[26px] h-[26px] rounded-full border-[1.5px] border-gold-on-cover flex items-center justify-center font-serif text-xs font-bold text-gold-on-cover shrink-0"
             aria-hidden="true"
           >
-            {data.hero.nameFirst.charAt(0)}
+            {SITE.nameFirst.charAt(0)}
           </span>
-          <span>{data.header.brandShort}</span>
+          <span>{SITE.brandShort}</span>
         </a>
 
         <nav className="flex gap-1 max-phone:hidden" aria-label="Primary">
@@ -60,9 +70,9 @@ export function SiteHeader() {
             onClick={toggleLang}
             aria-label="Switch language"
           >
-            <span className="text-on-cover">{ui.lang}</span>
+            <span className="text-on-cover">{locale.toUpperCase()}</span>
             <span className="text-gold-on-cover">/</span>
-            <span className="text-on-cover/55">{ui.langSwitch}</span>
+            <span className="text-on-cover/55">{otherLocale.toUpperCase()}</span>
           </button>
           <button
             type="button"

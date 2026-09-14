@@ -61,18 +61,23 @@
   --watermark: color-mix(in oklab, var(--color-gold) 7%, transparent);
 }
 
-/* ─────────────────────────  BASE  ───────────────────────── */
-html { scroll-behavior: smooth; }
-::selection { background: var(--color-stamp); color: var(--color-on-stamp); }
-a { color: inherit; }
+/* ─────────────────────────  BASE  ─────────────────────────
+   Inside @layer base so Tailwind utility classes (e.g. text-neutral-600
+   on an <a>) can still override these — unlayered CSS always beats
+   layered CSS regardless of specificity, which silently broke every
+   colored link outside the public site's own token system. */
+@layer base {
+  html { scroll-behavior: smooth; }
+  ::selection { background: var(--color-stamp); color: var(--color-on-stamp); }
+  a { color: inherit; }
+  section[id] { scroll-margin-top: 88px; }
+}
 
 .paper-grid {
   background-image:
     repeating-linear-gradient(0deg, var(--watermark) 0px, var(--watermark) 1px, transparent 1px, transparent 64px),
     repeating-linear-gradient(90deg, var(--watermark) 0px, var(--watermark) 1px, transparent 1px, transparent 64px);
 }
-
-section[id] { scroll-margin-top: 88px; }
 
 /* ─────────────────────────  ENTRY / REVEAL ANIMATION  ───────────────────────── */
 @keyframes heroEnter {

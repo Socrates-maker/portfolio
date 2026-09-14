@@ -1,10 +1,12 @@
-"use client";
-
-import { useLang } from "@/components/lang-provider";
+import { getLocale, getTranslations } from "next-intl/server";
+import type { Locale } from "@/lib/locale";
+import { getSkillGroups } from "@/lib/db/queries";
 import { Reveal, RevealList } from "@/components/reveal";
 
-export function Skills() {
-  const { data } = useLang();
+export async function Skills() {
+  const t = await getTranslations();
+  const locale = (await getLocale()) as Locale;
+  const skillGroups = await getSkillGroups();
 
   return (
     <section className="w-[var(--col)] mx-auto" id="skills">
@@ -13,10 +15,10 @@ export function Skills() {
         className="grid grid-cols-[200px_1fr] gap-[clamp(16px,3vw,48px)] items-baseline pb-[clamp(28px,4vh,48px)] border-b-2 border-cover max-phone:grid-cols-1"
       >
         <h2 className="font-serif font-semibold tracking-[-0.006em] text-[clamp(24px,3.2vw,36px)] leading-[1.1] max-w-[28ch] text-fg">
-          {data.sections.skillsTitle}
+          {t("sections.skillsTitle")}
         </h2>
         <p className="col-start-2 max-phone:col-start-1 max-w-[56ch] text-fg-muted text-sm font-sans">
-          {data.sections.skillsIntro}
+          {t("sections.skillsIntro")}
         </p>
       </Reveal>
 
@@ -24,13 +26,13 @@ export function Skills() {
         className="grid grid-cols-3 gap-px border-t border-l border-dashed border-hairline-strong max-phone:grid-cols-1"
         staggerMs={80}
       >
-        {data.skillGroups.map((group) => (
+        {skillGroups.map((group) => (
           <div
-            key={group.label}
+            key={group.id}
             className="p-[clamp(24px,3vw,32px)] border-r border-b border-dashed border-hairline-strong bg-[color-mix(in_oklab,var(--color-bg)_97%,var(--color-cover)_3%)]"
           >
             <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-gold mb-4 font-bold">
-              {group.label}
+              {group.label[locale]}
             </div>
             <div className="flex flex-col">
               {group.items.map((item, i) => (

@@ -1,18 +1,19 @@
 "use client";
 
-import { useLang } from "@/components/lang-provider";
+import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/reveal";
 import { ExternalArrowIcon } from "@/components/icons/arrow-icon";
+import { SITE } from "@/lib/site";
 
 export function Contact() {
-  const { data } = useLang();
+  const t = useTranslations();
 
   return (
     <section className="bg-cover text-on-cover" id="contact">
       <div className="w-[var(--col)] mx-auto py-[clamp(64px,9vh,120px)]">
         <Reveal as="div">
           <h2 className="font-serif font-semibold text-[clamp(32px,5vw,68px)] leading-[1.04] tracking-[-0.012em] max-w-[18ch] text-on-cover">
-            {renderContactTitle(data.sections.contactTitle)}
+            {renderContactTitle(t("sections.contactTitle"))}
           </h2>
         </Reveal>
 
@@ -23,13 +24,13 @@ export function Contact() {
         >
           <div>
             <p className="font-sans text-[15.5px] leading-[1.6] text-on-cover/75 max-w-[48ch]">
-              {data.sections.contactBody}
+              {t("sections.contactBody")}
             </p>
             <a
               className="group inline-flex items-center gap-3.5 max-w-full font-mono font-bold text-[clamp(15px,1.6vw,19px)] [overflow-wrap:anywhere] mt-6 px-[22px] py-3.5 border-2 border-gold-on-cover rounded-[3px] no-underline text-gold-on-cover transition-colors duration-200 hover:bg-gold-on-cover hover:text-cover focus-visible:outline focus-visible:outline-2 focus-visible:outline-on-cover focus-visible:outline-offset-2"
-              href={`mailto:${data.contact.email}`}
+              href={`mailto:${SITE.contact.email}`}
             >
-              <span>{data.contact.email}</span>
+              <span>{SITE.contact.email}</span>
               <span
                 className="inline-flex transition-transform duration-200 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
                 aria-hidden="true"
@@ -40,7 +41,7 @@ export function Contact() {
           </div>
 
           <div className="flex flex-col border-t border-dashed border-on-cover/30">
-            {data.contact.socials.map((s) => (
+            {SITE.contact.socials.map((s) => (
               <a
                 key={s.label}
                 className="group/social block border-b border-dashed border-on-cover/30 no-underline text-on-cover overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-on-cover focus-visible:-outline-offset-2"

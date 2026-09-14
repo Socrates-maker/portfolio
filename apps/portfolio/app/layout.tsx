@@ -51,7 +51,7 @@ export default async function RootLayout({
   return (
     <html lang={initialLang} data-theme="light" suppressHydrationWarning>
       <body
-        className={`${zillaSlab.variable} ${publicSans.variable} ${courierPrime.variable}`}
+        className={`${zillaSlab.variable} ${publicSans.variable} ${courierPrime.variable} paper-grid bg-bg text-fg font-sans text-base leading-[1.55] antialiased [text-rendering:optimizeLegibility] transition-colors duration-[350ms]`}
       >
         <InkFilters />
         <ThemeProvider

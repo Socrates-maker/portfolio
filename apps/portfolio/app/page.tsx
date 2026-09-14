@@ -8,13 +8,13 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="section-y" />
+      <div className="h-[var(--section-y)]" />
       <Projects />
-      <div className="section-y" />
+      <div className="h-[var(--section-y)]" />
       <Experience />
-      <div className="section-y" />
+      <div className="h-[var(--section-y)]" />
       <Skills />
-      <div className="section-y" />
+      <div className="h-[var(--section-y)]" />
       <Contact />
     </>
   );

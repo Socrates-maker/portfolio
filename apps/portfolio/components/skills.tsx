@@ -17,7 +17,7 @@ export async function Skills() {
         <h2 className="font-serif font-semibold tracking-[-0.006em] text-[clamp(24px,3.2vw,36px)] leading-[1.1] max-w-[28ch] text-fg">
           {t("sections.skillsTitle")}
         </h2>
-        <p className="col-start-2 max-phone:col-start-1 max-w-[56ch] text-fg-muted text-sm font-sans">
+        <p className="col-start-3 self-center max-phone:col-start-1 max-w-[56ch] text-fg-muted text-sm font-sans">
           {t("sections.skillsIntro")}
         </p>
       </Reveal>
@@ -42,7 +42,10 @@ export async function Skills() {
                 >
                   <span className="flex justify-between w-full items-baseline [transition:color_.2s,transform_.22s_ease] group-hover:text-stamp group-hover:translate-x-1.5">
                     <span>{item}</span>
-                    <span className="font-mono text-[10px] text-fg-soft" aria-hidden="true">
+                    <span
+                      className="font-mono text-[10px] text-fg-soft"
+                      aria-hidden="true"
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </span>

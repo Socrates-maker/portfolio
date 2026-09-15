@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
     // so admin edits invalidate the public site's cached content.
     useCache: true,
   },
+  images: {
+    remotePatterns: [
+      // Project screenshots uploaded from the admin, stored in Vercel Blob.
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

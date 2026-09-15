@@ -26,9 +26,11 @@ function readProjectFields(formData: FormData): Omit<NewProject, "id"> {
   return {
     sortOrder: Number(sortOrder) || 0,
     published: formData.get("published") === "on",
+    featured: formData.get("featured") === "on",
     year,
     url,
     stack: stack.split(",").map((s) => s.trim()).filter(Boolean),
+    images: formData.getAll("images").filter((v): v is string => typeof v === "string" && v.length > 0),
     title: readLocalized(formData, "title"),
     kind: readLocalized(formData, "kind"),
     blurb: readLocalized(formData, "blurb"),

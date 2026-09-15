@@ -29,6 +29,11 @@ export default async function ProjectsListPage() {
                     Hidden
                   </span>
                 )}
+                {p.featured && (
+                  <span className="text-xs font-medium text-emerald-700 bg-emerald-100 rounded-full px-2 py-0.5">
+                    Featured
+                  </span>
+                )}
               </div>
               <div className="text-xs text-neutral-500">order {p.sortOrder}</div>
             </div>

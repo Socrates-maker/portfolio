@@ -12,22 +12,22 @@ export function Contact() {
     <section className="bg-cover text-on-cover" id="contact">
       <div className="w-[var(--col)] mx-auto py-[clamp(64px,9vh,120px)]">
         <Reveal as="div">
-          <h2 className="font-serif font-semibold text-[clamp(32px,5vw,68px)] leading-[1.04] tracking-[-0.012em] max-w-[18ch] text-on-cover">
+          <h2 className="font-serif font-semibold text-[clamp(32px,5vw,68px)] leading-[1.04] tracking-[-0.012em] max-w-[18ch] text-on-cover max-phone:text-center">
             {renderContactTitle(t("sections.contactTitle"))}
           </h2>
         </Reveal>
 
         <Reveal
           as="div"
-          className="grid grid-cols-[1.3fr_1fr] gap-[clamp(28px,5vw,80px)] mt-[clamp(32px,5vh,56px)] items-end max-phone:grid-cols-1 max-phone:gap-8 [&>*]:min-w-0"
+          className="grid grid-cols-[1.3fr_1fr] gap-[clamp(28px,5vw,80px)] mt-[clamp(32px,5vh,56px)] items-end max-phone:grid-cols-1 max-phone:gap-8 [&>*]:min-w-0 "
           delayMs={120}
         >
-          <div>
-            <p className="font-sans text-[15.5px] leading-[1.6] text-on-cover/75 max-w-[48ch]">
+          <div className="max-phone:text-center">
+            <p className="font-sans text-[15.5px] leading-[1.6] text-on-cover/75 max-w-[48ch] ">
               {t("sections.contactBody")}
             </p>
             <a
-              className="group inline-flex items-center gap-3.5 max-w-full font-mono font-bold text-[clamp(15px,1.6vw,19px)] [overflow-wrap:anywhere] mt-6 px-[22px] py-3.5 border-2 border-gold-on-cover rounded-[3px] no-underline text-gold-on-cover transition-colors duration-200 hover:bg-gold-on-cover hover:text-cover focus-visible:outline focus-visible:outline-2 focus-visible:outline-on-cover focus-visible:outline-offset-2"
+              className="group  inline-flex items-center gap-3.5 max-w-full font-mono font-bold text-[clamp(15px,1.6vw,19px)] [overflow-wrap:anywhere] mt-6 px-[22px] py-3.5 border-2 border-gold-on-cover rounded-[3px] no-underline text-gold-on-cover transition-colors duration-200 hover:bg-gold-on-cover hover:text-cover focus-visible:outline focus-visible:outline-2 focus-visible:outline-on-cover focus-visible:outline-offset-2"
               href={`mailto:${SITE.contact.email}`}
             >
               <span>{SITE.contact.email}</span>

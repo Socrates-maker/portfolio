@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { LANG_COOKIE, type Locale } from "@/lib/locale";
 import { SITE } from "@/lib/site";
@@ -14,6 +14,7 @@ export function SiteHeader() {
   const t = useTranslations();
   const locale = useLocale() as Locale;
   const router = useRouter();
+  const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,17 +23,21 @@ export function SiteHeader() {
 
   const isDark = mounted && resolvedTheme === "dark";
   const otherLocale: Locale = locale === "fr" ? "en" : "fr";
+  const isWorkPage = pathname === "/work";
 
   const toggleLang = () => {
     document.cookie = `${LANG_COOKIE}=${otherLocale}; path=/; max-age=31536000; samesite=lax`;
     router.refresh();
   };
 
+  // On the dedicated /work page there's no #experience/#skills/#contact
+  // section to jump to, so those links need to go back to the home page
+  // first. "Work" itself just marks as active — it already is the page.
   const navLinks = [
-    { href: "#work", label: t("nav.work") },
-    { href: "#experience", label: t("nav.experience") },
-    { href: "#skills", label: t("nav.skills") },
-    { href: "#contact", label: t("nav.contact") },
+    { href: isWorkPage ? "/work" : "#work", label: t("nav.work"), active: isWorkPage },
+    { href: isWorkPage ? "/#experience" : "#experience", label: t("nav.experience"), active: false },
+    { href: isWorkPage ? "/#skills" : "#skills", label: t("nav.skills"), active: false },
+    { href: isWorkPage ? "/#contact" : "#contact", label: t("nav.contact"), active: false },
   ];
 
   return (
@@ -54,9 +59,14 @@ export function SiteHeader() {
         <nav className="flex gap-1 max-phone:hidden" aria-label="Primary">
           {navLinks.map((link) => (
             <a
-              key={link.href}
+              key={link.label}
               href={link.href}
-              className="font-mono text-xs leading-none tracking-[0.06em] uppercase text-on-cover/72 no-underline px-3.5 py-2.5 border border-transparent transition-colors hover:text-on-cover hover:border-gold-on-cover/50 hover:bg-gold-on-cover/10"
+              aria-current={link.active ? "page" : undefined}
+              className={`font-mono text-xs leading-none tracking-[0.06em] uppercase no-underline px-3.5 py-2.5 border transition-colors hover:text-on-cover hover:border-gold-on-cover/50 hover:bg-gold-on-cover/10 ${
+                link.active
+                  ? "text-on-cover border-gold-on-cover/50 bg-gold-on-cover/10"
+                  : "text-on-cover/72 border-transparent"
+              }`}
             >
               {link.label}
             </a>
@@ -143,10 +153,13 @@ export function SiteHeader() {
         <div className="w-[var(--col)] mx-auto flex flex-col">
           {navLinks.map((link) => (
             <a
-              key={link.href}
+              key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-[10px] py-4 px-1 font-mono text-[13px] uppercase tracking-[0.05em] text-on-cover/80 no-underline border-b border-on-cover/15 last:border-b-0 hover:text-on-cover"
+              aria-current={link.active ? "page" : undefined}
+              className={`flex items-center gap-[10px] py-4 px-1 font-mono text-[13px] uppercase tracking-[0.05em] no-underline border-b border-on-cover/15 last:border-b-0 hover:text-on-cover ${
+                link.active ? "text-on-cover" : "text-on-cover/80"
+              }`}
             >
               {link.label}
             </a>

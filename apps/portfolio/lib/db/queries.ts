@@ -1,5 +1,5 @@
 import { cacheTag } from "next/cache";
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { experiences, projects, skillGroups } from "@/lib/db/schema";
 
@@ -11,6 +11,17 @@ export async function getProjects() {
     .select()
     .from(projects)
     .where(eq(projects.published, true))
+    .orderBy(asc(projects.sortOrder));
+}
+
+/** Home page: published + featured projects only, for the short list. */
+export async function getFeaturedProjects() {
+  "use cache";
+  cacheTag("projects");
+  return db
+    .select()
+    .from(projects)
+    .where(and(eq(projects.published, true), eq(projects.featured, true)))
     .orderBy(asc(projects.sortOrder));
 }
 

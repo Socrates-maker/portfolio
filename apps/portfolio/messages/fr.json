@@ -25,6 +25,8 @@
   "sections": {
     "workTitle": "Projets récents",
     "workIntro": "Quelques produits sur lesquels j'ai eu plaisir à travailler ces dernières années.",
+    "allWorkTitle": "Tous les projets",
+    "allWorkIntro": "La liste complète — tout ce que j'ai livré, pas seulement les temps forts.",
     "experienceTitle": "Là où j'ai construit",
     "skillsTitle": "Avec quoi je travaille",
     "skillsIntro": "Pas une liste exhaustive — ce que j'utilise au quotidien, en confiance.",
@@ -36,6 +38,8 @@
   },
   "ui": {
     "visitSite": "Voir le site",
+    "viewAllProjects": "Voir tous les projets",
+    "backToHome": "Retour à l'accueil",
     "fieldName": "Nom",
     "fieldProfession": "Profession",
     "fieldLocation": "Lieu",

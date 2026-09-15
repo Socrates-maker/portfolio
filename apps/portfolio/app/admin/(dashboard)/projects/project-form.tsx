@@ -1,11 +1,81 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import { upload } from "@vercel/blob/client";
 import type { Project } from "@/lib/db/schema";
 
 const INPUT =
   "w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-400";
 const LABEL = "block text-sm font-medium text-neutral-700 mb-1";
+
+function ImagesField({ defaultImages }: { defaultImages: string[] }) {
+  const [images, setImages] = useState<string[]>(defaultImages);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleFiles(files: FileList | null) {
+    if (!files || files.length === 0) return;
+    setUploading(true);
+    setError(null);
+    try {
+      const uploaded = await Promise.all(
+        Array.from(files).map((file) =>
+          upload(file.name, file, {
+            access: "public",
+            handleUploadUrl: "/admin/projects/upload",
+          })
+        )
+      );
+      setImages((prev) => [...prev, ...uploaded.map((blob) => blob.url)]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload failed.");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  function removeImage(url: string) {
+    setImages((prev) => prev.filter((src) => src !== url));
+  }
+
+  return (
+    <div>
+      <label className={LABEL} htmlFor="images-input">
+        Screenshots
+      </label>
+      {images.length > 0 && (
+        <div className="flex flex-wrap gap-3 mb-3">
+          {images.map((url) => (
+            <div key={url} className="relative w-28 h-20 rounded-md overflow-hidden border border-neutral-300">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={url} alt="" className="w-full h-full object-cover" />
+              <input type="hidden" name="images" value={url} />
+              <button
+                type="button"
+                onClick={() => removeImage(url)}
+                aria-label="Remove screenshot"
+                className="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/70 text-white text-xs leading-none flex items-center justify-center"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+      <input
+        id="images-input"
+        type="file"
+        accept="image/png,image/jpeg,image/webp,image/avif"
+        multiple
+        disabled={uploading}
+        onChange={(e) => handleFiles(e.target.files)}
+        className="text-sm"
+      />
+      {uploading && <p className="text-xs text-neutral-500 mt-1">Uploading…</p>}
+      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
+    </div>
+  );
+}
 
 function LocalizedField({
   name,
@@ -101,15 +171,26 @@ export function ProjectForm({
         </div>
       </div>
 
-      <label className="flex items-center gap-2 text-sm text-neutral-700">
-        <input
-          type="checkbox"
-          name="published"
-          defaultChecked={defaultValues?.published ?? true}
-          className="rounded border-neutral-300"
-        />
-        Published (visible on the public site)
-      </label>
+      <div className="flex items-center gap-6">
+        <label className="flex items-center gap-2 text-sm text-neutral-700">
+          <input
+            type="checkbox"
+            name="published"
+            defaultChecked={defaultValues?.published ?? true}
+            className="rounded border-neutral-300"
+          />
+          Published (visible on the public site)
+        </label>
+        <label className="flex items-center gap-2 text-sm text-neutral-700">
+          <input
+            type="checkbox"
+            name="featured"
+            defaultChecked={defaultValues?.featured ?? false}
+            className="rounded border-neutral-300"
+          />
+          Featured (shown on the home page)
+        </label>
+      </div>
 
       <div>
         <label className={LABEL} htmlFor="stack">
@@ -123,6 +204,8 @@ export function ProjectForm({
           className={INPUT}
         />
       </div>
+
+      <ImagesField defaultImages={defaultValues?.images ?? []} />
 
       <LocalizedField name="title" label="Title" defaultEn={defaultValues?.title.en} defaultFr={defaultValues?.title.fr} />
       <LocalizedField name="kind" label="Kind" defaultEn={defaultValues?.kind.en} defaultFr={defaultValues?.kind.fr} />

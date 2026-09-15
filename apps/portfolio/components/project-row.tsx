@@ -1,9 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { Project } from "@/lib/db/schema";
 import type { Locale } from "@/lib/locale";
-import { ExternalArrowIcon, PlusMinusIcon } from "@/components/icons/arrow-icon";
+import {
+  ExternalArrowIcon,
+  PlusMinusIcon,
+} from "@/components/icons/arrow-icon";
 
 const ROW_GRID_COLS =
   "grid-cols-[96px_1fr_minmax(140px,220px)_90px] max-tablet:grid-cols-[56px_1fr_68px]";
@@ -97,12 +101,36 @@ export function ProjectRow({
         <div
           className={`overflow-hidden grid ${ROW_GRID_COLS} gap-[clamp(12px,2vw,28px)] px-2`}
         >
-          <p className="col-[2/-1] font-sans text-sm leading-[1.6] text-fg-muted max-w-[60ch] pt-1 opacity-0 -translate-y-1 transition-[opacity,transform] duration-[250ms] ease-out group-data-[open=true]/detail:opacity-100 group-data-[open=true]/detail:translate-y-0">
+          <p className="col-[2/-1] max-tablet:col-[1/-1] text-justify font-sans text-sm leading-[1.6] text-fg-muted max-w-[60ch] pt-1 opacity-0 -translate-y-1 transition-[opacity,transform] duration-[250ms] ease-out group-data-[open=true]/detail:opacity-100 group-data-[open=true]/detail:translate-y-0">
             {p.detail[locale]}
           </p>
+
+          {p.images.length > 0 && (
+            <div className="col-[2/-1] max-tablet:col-[1/-1] flex gap-3 overflow-x-auto pt-4 opacity-0 -translate-y-1 transition-[opacity,transform] duration-[250ms] ease-out group-data-[open=true]/detail:opacity-100 group-data-[open=true]/detail:translate-y-0">
+              {p.images.map((src, i) => (
+                <a
+                  key={src}
+                  href={src}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="relative shrink-0 w-[220px] h-[140px] rounded-sm overflow-hidden border border-hairline-strong bg-bg-2 max-tablet:w-[160px] max-tablet:h-[104px]"
+                  tabIndex={open ? 0 : -1}
+                >
+                  <Image
+                    src={src}
+                    alt={`${title} — screenshot ${i + 1}`}
+                    fill
+                    sizes="220px"
+                    className="object-cover"
+                  />
+                </a>
+              ))}
+            </div>
+          )}
+
           {isLink && (
             <a
-              className="group/visit col-[2/-1] inline-flex items-center gap-2 w-fit my-4 mb-7 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-stamp no-underline px-4 py-2.5 border border-stamp rounded-sm opacity-0 -translate-y-1 transition-[opacity,transform,border-color,background-color,color] duration-[250ms] ease-out group-data-[open=true]/detail:opacity-100 group-data-[open=true]/detail:translate-y-0 hover:bg-stamp hover:text-on-stamp focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2"
+              className="group/visit col-[2/-1] max-tablet:col-[1/-1] inline-flex items-center gap-2 w-fit my-4 mb-7 max-tablet:justify-self-center font-mono text-xs font-semibold uppercase tracking-[0.05em] text-stamp no-underline px-4 py-2.5 border border-stamp rounded-sm opacity-0 -translate-y-1 transition-[opacity,transform,border-color,background-color,color] duration-[250ms] ease-out group-data-[open=true]/detail:opacity-100 group-data-[open=true]/detail:translate-y-0 hover:bg-stamp hover:text-on-stamp focus-visible:outline focus-visible:outline-gold focus-visible:outline-offset-2"
               href={p.url}
               target="_blank"
               rel="noreferrer noopener"

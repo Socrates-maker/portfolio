@@ -85,7 +85,7 @@ export function Hero() {
         </div>
 
         <div className="flex flex-col items-center md:flex-row   md:justify-between border-t border-dashed border-hairline-strong ">
-          <div className="flex items-center gap-3.5 flex-wrap px-[clamp(24px,4vw,40px)] py-[clamp(16px,3vw,24px)] ">
+          {/*  <div className="flex items-center gap-3.5 flex-wrap px-[clamp(24px,4vw,40px)] py-[clamp(16px,3vw,24px)] ">
             <span className="inline-flex items-center gap-2 border-2 border-stamp text-stamp rounded-[3px] px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.1em] uppercase [transform:rotate(-2deg)] [filter:url(#ink-rough)]">
               <span
                 className="w-1.5 h-1.5 rounded-full bg-stamp motion-safe:animate-[liveBlink_2.2s_ease-in-out_infinite]"
@@ -93,7 +93,7 @@ export function Hero() {
               />
               {t("header.availability")}
             </span>
-          </div>
+          </div>*/}
 
           <div className="px-[clamp(24px,4vw,40px)] pb-[clamp(28px,4vw,40px)]">
             <div className="flex gap-2 md:gap-3 mt-7 flex-wrap ">

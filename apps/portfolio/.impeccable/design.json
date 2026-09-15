@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-14T16:21:54Z",
+  "title": "Design System: Socrates Ekpaliguidime — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "stamp-red": { "role": "primary", "displayName": "Stamp Red", "canonical": "#a52328", "tonalRamp": ["#2a0a0b", "#4d1214", "#711a1d", "#a52328", "#c25459", "#d98a8d", "#eec0c1", "#f8e5e6"] },
+      "cover-navy": { "role": "secondary", "displayName": "Passport-Cover Navy", "canonical": "#1a2942", "tonalRamp": ["#060a11", "#0e1626", "#152337", "#1a2942", "#334a6d", "#5c7398", "#94a7c2", "#d6dde8"] },
+      "foil-gold-on-cover": { "role": "secondary", "displayName": "Foil Gold (on navy)", "canonical": "#d4ac57", "tonalRamp": ["#2e2109", "#5a4211", "#886419", "#684c17-alt", "#d4ac57", "#e2c584", "#eeddb0", "#f8f0dd"] },
+      "paper-cream": { "role": "neutral", "displayName": "Security-Paper Cream", "canonical": "#f2ecd9", "tonalRamp": ["#3a3524", "#5c563c", "#847c58", "#b0a878", "#d4cba0", "#e8dfc2", "#f2ecd9", "#faf7ee"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#14171c", "tonalRamp": ["#000000", "#0a0c0f", "#14171c", "#2b2f36", "#4d5258", "#767b81", "#a6aaaf", "#dcdee0"] },
+      "hairline-strong": { "role": "neutral", "displayName": "Hairline (strong)", "canonical": "#ab9c68", "tonalRamp": ["#332d1a", "#5a4f2c", "#82733f", "#ab9c68", "#c4b988", "#d9d1ad", "#ecE7d0", "#f7f4e9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Name Field Display", "purpose": "The passport data-page name field value only — the one true display moment in the system." },
+      "headline": { "displayName": "Section Headline", "purpose": "Work / Experience / Skills section titles in `.sec-head`." },
+      "label": { "displayName": "Field Label / Mono", "purpose": "Ruled-field labels, document IDs, stack pills, nav, entry counts — the OCR/data register." }
+    },
+    "motion": [
+      { "name": "reveal-in", "value": "opacity .4s ease, transform .45s cubic-bezier(0.16, 1, 0.3, 1); from scale(1.06) to scale(1)", "purpose": "The single authored scroll-reveal moment (Reveal/RevealList), staggered per list, disabled under prefers-reduced-motion." },
+      { "name": "hero-enter", "value": ".7s cubic-bezier(.2,.8,.3,1); translateY(10px) scale(.99) -> translateY(0) scale(1)", "purpose": "One-time entry animation for the hero data-page panel on load." },
+      { "name": "ink-rough", "value": "feTurbulence baseFrequency 0.045 + feDisplacementMap scale 7", "purpose": "Small ink-roughening filter for the availability stamp and project stamp marks." },
+      { "name": "ink-rough-lg", "value": "feTurbulence baseFrequency 0.03 + feDisplacementMap scale 9", "purpose": "Larger ink-roughening filter for the primary CTA." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "720px" },
+      { "name": "data-page-collapse", "value": "880px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Stamp CTA)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The official 'request/apply' stamp-styled call to action; stamp-red ink on a rotated, ink-roughened mark.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#contact\">Get in touch<span class=\"ds-btn-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></span></a>",
+      "css": ".ds-btn-primary { position: relative; display: inline-flex; align-items: center; gap: 10px; font: 600 13px/1 'Courier Prime', monospace; letter-spacing: 0.05em; text-transform: uppercase; padding: 14px 22px; border-radius: 3px; border: 2px solid #a52328; background: rgba(165,35,40,0.09); color: #a52328; text-decoration: none; transform: rotate(-1.2deg); transition: transform .2s ease, background .2s; } .ds-btn-primary::after { content: ''; position: absolute; inset: 4px; border: 1px solid #a52328; border-radius: 2px; pointer-events: none; } .ds-btn-primary:hover { transform: rotate(-1.2deg) translateY(-1px); background: rgba(165,35,40,0.16); } .ds-btn-primary:focus-visible { outline: 2px solid #684c17; outline-offset: 2px; } .ds-btn-arrow { display: inline-flex; transition: transform .2s ease; } .ds-btn-primary:hover .ds-btn-arrow { transform: translateX(3px); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action, ink-outlined, no rotation or ink filter.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#work\">See the work</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 10px; font: 600 13px/1 'Courier Prime', monospace; letter-spacing: 0.05em; text-transform: uppercase; padding: 14px 22px; border-radius: 3px; border: 2px solid #14171c; background: transparent; color: #14171c; text-decoration: none; transition: background .2s; } .ds-btn-ghost:hover { background: rgba(20,23,28,0.06); } .ds-btn-ghost:focus-visible { outline: 2px solid #684c17; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ruled Data Field",
+      "kind": "custom",
+      "refersTo": "data-field",
+      "description": "Label-over/beside-value row used throughout the hero data page; the system's replacement for a card or a kicker-above-heading pattern.",
+      "html": "<div class=\"ds-data-field\"><span class=\"ds-f-label\">Location</span><p class=\"ds-f-value\">Cotonou, Benin</p></div>",
+      "css": ".ds-data-field { padding: 12px 0; border-bottom: 1px solid #cfc4a0; display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: baseline; } .ds-f-label { font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #5b5740; } .ds-f-value { font-family: 'Zilla Slab', Georgia, serif; font-weight: 600; color: #14171c; margin: 0; }"
+    },
+    {
+      "name": "Stamp Row (Project Entry)",
+      "kind": "custom",
+      "refersTo": "stamp-row",
+      "description": "Work-entry row: circular ink-roughened stamp mark, serif title with inline +/- toggle, mono meta, gold year; expands to a case-study panel.",
+      "html": "<div class=\"ds-stamp-row\"><span class=\"ds-stamp-mark\">01</span><div><h3 class=\"ds-work-title\">Project Title</h3><p class=\"ds-work-blurb\">One-line summary of the shipped product.</p></div><span class=\"ds-work-year\">2024</span></div>",
+      "css": ".ds-stamp-row { display: grid; grid-template-columns: 74px 1fr 60px; align-items: center; gap: 24px; padding: 24px 8px; border-bottom: 1px dashed #ab9c68; } .ds-stamp-mark { width: 74px; height: 74px; border-radius: 50%; border: 2px solid #a52328; color: #a52328; display: flex; align-items: center; justify-content: center; transform: rotate(-8deg); font-family: 'Courier Prime', monospace; font-size: 10px; font-weight: 700; } .ds-work-title { font-family: 'Zilla Slab', Georgia, serif; font-size: 28px; font-weight: 600; margin: 0; } .ds-work-blurb { font-family: 'Public Sans', sans-serif; font-size: 13.5px; color: #4d5258; margin-top: 8px; } .ds-work-year { font-family: 'Courier Prime', monospace; font-size: 12px; font-weight: 700; color: #684c17; text-align: right; }"
+    },
+    {
+      "name": "Sticky Masthead Nav",
+      "kind": "nav",
+      "refersTo": "site-header",
+      "description": "Navy cover-bar header with a circular brand seal, mono nav links, and a bordered toolbar; collapses to a full-width drawer under 720px.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"#top\"><span class=\"ds-seal\">S</span>Socrates E.</a><nav class=\"ds-nav\"><a href=\"#work\">Work</a><a href=\"#experience\">Experience</a></nav></header>",
+      "css": ".ds-header { background: #1a2942; color: #f2ecd9; border-bottom: 3px double #d4ac57; display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 24px; } .ds-brand { display: flex; align-items: center; gap: 10px; font-family: 'Zilla Slab', serif; font-size: 16px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: #f2ecd9; text-decoration: none; } .ds-seal { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #d4ac57; display: flex; align-items: center; justify-content: center; font-family: 'Zilla Slab', serif; font-size: 12px; font-weight: 700; color: #d4ac57; } .ds-nav { display: flex; gap: 4px; } .ds-nav a { font: 500 12px/1 'Courier Prime', monospace; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(242,236,217,0.72); text-decoration: none; padding: 10px 14px; border: 1px solid transparent; } .ds-nav a:hover { color: #f2ecd9; border-color: rgba(212,172,87,0.5); background: rgba(212,172,87,0.1); }"
+    },
+    {
+      "name": "Photo-ID Box",
+      "kind": "custom",
+      "refersTo": "photo-id-box",
+      "description": "Bordered 4:5 headshot box with a slight desaturation filter and a centered mono caption — the hero's signature device.",
+      "html": "<figure class=\"ds-photo-id\"><img src=\"headshot.jpg\" alt=\"\" /><figcaption>Data Page Photo</figcaption></figure>",
+      "css": ".ds-photo-id { width: 280px; } .ds-photo-id img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border: 2px solid #14171c; filter: grayscale(0.15) contrast(1.04); display: block; } .ds-photo-id figcaption { font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: #5b5740; text-align: center; margin-top: 8px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Passport Data Page",
+    "overview": "The site reads as a person's official record, not a pitch: a data page holding a photo-ID box and ruled fields, followed by dossier pages of stamped work entries, endorsements, and a competency annex, closing on a navy signature page. Every claim is presented as an entry in a register — dated, numbered, or stamped — rather than argued for in editorial copy. The world refuses the site's prior warm-editorial \"trust my voice\" look in favor of \"trust the record.\"\n\nMaterial character is paper-and-ink: a cream security-paper background carries a faint guilloché watermark grid; a passport-cover navy anchors the header, footer, and contact/signature page; stamp red marks the one interactive accent (availability stamp, primary CTA, project stamp marks, hover ink). Ink-roughened SVG filters (feTurbulence + feDisplacementMap, via components/ink-filters.tsx) are applied only to the handful of elements that represent a physically pressed stamp — the availability stamp, the primary CTA, and each project's circular stamp mark — so the roughening reads as an artifact of ink on paper, not decoration scattered across the page.",
+    "keyCharacteristics": [
+      "Ruled data fields and dashed hairline dividers stand in for cards; there are no boxed/shadowed content cards anywhere in the build.",
+      "A single warm stamp red carries all \"action\" and \"live\" meaning (CTA, availability dot, project stamp, hover state on rows) — it does not appear as generic decoration.",
+      "OCR-style monospace (Courier Prime) marks anything that reads as data/metadata (field labels, dates, stack pills, document IDs, nav links); Zilla Slab serif carries every heading and named value; Public Sans carries prose.",
+      "Entry/page numbering (project stamp numbers, annex item numbers, experience \"entry 01/03\") is load-bearing register pagination intrinsic to the dossier world, not a decorative section-number template.",
+      "Motion is a single authored moment — a scroll-triggered stagger fade/scale-in (.reveal/.reveal.in, Reveal/RevealList components) — applied uniformly and fully disabled under prefers-reduced-motion."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Stamp red is the only color that means \"act\" or \"live\" anywhere in the system — CTA, availability dot, project marks, row hover. No other color is reused for that meaning, and stamp red never appears as pure decoration.", "section": "colors" },
+      { "name": "The Tinted-Secondary Rule", "body": "Secondary text is never flat gray; it is tinted warm khaki or ink-mixed, keeping every muted label legible against both paper tones in light and dark.", "section": "colors" },
+      { "name": "The Ruled-Field Rule", "body": "Every named fact on the data page pairs a small-caps mono label with a serif or sans value on a hairline-underlined row — the field/value pattern is the system's substitute for a label-above-heading convention.", "section": "typography" },
+      { "name": "The No-Shadow Rule", "body": "The system never uses box-shadow. Separation is drawn with hairlines, dashed rules, and paper-tint color-mixes; a card needing to \"lift\" gets a border or tint, never a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do treat stamp red as the only accent that signals action or live status (CTA, availability dot, project marks, hover ink); reserve it there and nowhere else.",
+      "Do apply the ink-roughening SVG filter (ink-filters.tsx) only to elements that represent a physically pressed stamp (availability stamp, primary CTA, project stamp marks) — not as a general texture.",
+      "Do pair every named fact with a mono uppercase label over/beside a serif or sans value, following the ruled-field pattern, instead of a boxed card.",
+      "Do separate list rows with dashed hairlines and reflow multi-column rows via grid-template-areas on mobile rather than stacking to a single naive column.",
+      "Do use entry/page numbering (stamp numbers, annex item numbers, \"entry NN / NN\") where it functions as dossier pagination — this world's numbering carries record-keeping meaning, not decoration."
+    ],
+    "donts": [
+      "Don't add a box-shadow anywhere; the system has no elevation model beyond hairlines, borders, and paper-tint color-mixes.",
+      "Don't wrap content in an icon+heading+text card grid; the incumbent structure is ruled rows and dossier pages, not cards.",
+      "Don't add a kicker or eyebrow label above a section heading; the .sec-head pattern is heading + optional intro paragraph only.",
+      "Don't reach for a hard offset block shadow (4px 4px 0); this is a paper-and-ink world, not a neobrutalist one.",
+      "Don't introduce a second accent color; stamp red stays the system's only \"act/live\" signal."
+    ]
+  }
+}

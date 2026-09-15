@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "title": "Socrates Ekpaliguidime — Développeur logiciel",
+    "description": "Portfolio de Socrates Ekpaliguidime — développeur logiciel full-stack basé à Cotonou, au Bénin."
+  },
+  "nav": {
+    "work": "Projets",
+    "experience": "Parcours",
+    "skills": "Outils",
+    "contact": "Contact"
+  },
+  "header": {
+    "availability": "Ouvert aux missions · 2026"
+  },
+  "hero": {
+    "eyebrow": "Cotonou, Bénin",
+    "role": "Développeur logiciel",
+    "roleAccent": "full-stack",
+    "bio": "Je conçois des applications web fiables avec React, Next.js et NestJS. J'aide des startups à transformer des idées en produits concrets — du design d'API aux interfaces, en passant par l'automatisation des déploiements.",
+    "footnote": "Physique appliquée → ingénierie logicielle.",
+    "ctaPrimary": "Me contacter",
+    "ctaSecondary": "Voir les projets",
+    "photoCaption": "Photo · 2025"
+  },
+  "sections": {
+    "workTitle": "Projets récents",
+    "workIntro": "Quelques produits sur lesquels j'ai eu plaisir à travailler ces dernières années.",
+    "allWorkTitle": "Tous les projets",
+    "allWorkIntro": "La liste complète — tout ce que j'ai livré, pas seulement les temps forts.",
+    "experienceTitle": "Là où j'ai construit",
+    "skillsTitle": "Avec quoi je travaille",
+    "skillsIntro": "Pas une liste exhaustive — ce que j'utilise au quotidien, en confiance.",
+    "contactTitle": "On construit quelque chose ensemble ?",
+    "contactBody": "Disponible pour des missions full-stack, du conseil technique ou simplement une discussion autour d'un produit. Je réponds en moins de 24h."
+  },
+  "footer": {
+    "copy": "© 2026 Socrates Ekpaliguidime. Conçu avec soin."
+  },
+  "ui": {
+    "visitSite": "Voir le site",
+    "viewAllProjects": "Voir tous les projets",
+    "backToHome": "Retour à l'accueil",
+    "fieldName": "Nom",
+    "fieldProfession": "Profession",
+    "fieldLocation": "Lieu",
+    "fieldRemarks": "Remarques",
+    "fieldPriorField": "Domaine antérieur",
+    "entryLabel": "Entrée"
+  }
+}

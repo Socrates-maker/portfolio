@@ -165,7 +165,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/socrates/perso/portfolio/packages/database/generated/client",
+      "value": "/Users/ekpaliguidimesocrates/WebstormProjects/portfolio/packages/database/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -179,7 +179,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/socrates/perso/portfolio/packages/database/prisma/schema.prisma",
+    "sourceFilePath": "/Users/ekpaliguidimesocrates/WebstormProjects/portfolio/packages/database/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

@@ -1,53 +1,67 @@
 import type { Metadata } from "next";
-import { Anek_Telugu, Geist, Geist_Mono } from "next/font/google";
+import { Zilla_Slab, Public_Sans, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import React from "react";
+import { Analytics } from "@vercel/analytics/next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AppHeader } from "@/components/app-header";
-import { Footer } from "@/components/footer";
+import { InkFilters } from "@/components/ink-filters";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const zillaSlab = Zilla_Slab({
+  variable: "--font-zilla-slab",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-const anekTelegun = Anek_Telugu({
-  variable: "--font-anek-telegun",
+const courierPrime = Courier_Prime({
+  variable: "--font-courier-prime",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Socrates Ekpaliguidime portfolio",
-  description: "Socrates portfolio ",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} data-theme="light" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${anekTelegun.variable} font-sans antialiased`}
+        className={`${zillaSlab.variable} ${publicSans.variable} ${courierPrime.variable} paper-grid bg-bg text-fg font-sans text-base leading-[1.55] antialiased [text-rendering:optimizeLegibility] transition-colors duration-[350ms]`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="container  mx-auto md:px-10  max-w-5xl ">
-            <AppHeader />
-            <div className=" px-5 ">{children}</div>
-          </div>
-          <Footer />
-        </ThemeProvider>
+        <InkFilters />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ThemeProvider
+            attribute="data-theme"
+            defaultTheme="light"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );

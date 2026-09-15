@@ -1,0 +1,149 @@
+{
+  "title": "Choose the portfolio's new visual world",
+  "question": "The roll assigned Passport / Official Dossier for the redesign. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Passport / Official Dossier",
+      "kicker": "THE ROLL",
+      "lineage": "the official passport data page and its stamped visa pages",
+      "thesis": "Every real, checkable fact — project, employer, skill — reads like a verified entry, stamped and dated, not asserted.",
+      "palette": ["#1a2942", "#f2ecd9", "#b7282e", "#a9822f"],
+      "materials": ["security-paper texture", "guilloché watermark", "foil-adjacent cover type", "ink stamp"],
+      "viewport": "A data page: ruled photo-ID box holding the headshot at left, name/role/location set as ruled fields at right, a masthead cover strip above, an availability stamp strip below.",
+      "risk": "Reads bureaucratic and cold if the ink stays literal instead of warm — needs confident color and real warmth in the copy so it reads as credibility, not paperwork.",
+      "raised": [
+        { "from": "challenger-webgl-shader-portal", "raise": "The hero commits to one oversized, fully-held statement instead of splitting attention across several small elements." },
+        { "from": "challenger-hand-processed-film", "raise": "Accumulated stamps and page wear become literal proof of a real career timeline, not decoration." },
+        { "from": "challenger-rain-night-cityscape", "raise": "Language and theme toggles synchronize as one bilingual-document state change instead of two independent switches." },
+        { "from": "challenger-saturday-title-card", "raise": "Each section change gets its own named transition beat (a page-turn/stamp-press), not one uniform fade repeated everywhere." }
+      ],
+      "wireframe": {
+        "cols": 12, "rows": 10,
+        "regions": [
+          { "label": "cover masthead strip", "x": 0, "y": 0, "w": 12, "h": 1, "accent": true },
+          { "label": "photo-ID box (headshot)", "x": 0, "y": 1, "w": 4, "h": 5, "accent": true },
+          { "label": "ruled data fields (name / role / bio)", "x": 4, "y": 1, "w": 8, "h": 5 },
+          { "label": "availability stamp strip", "x": 0, "y": 6, "w": 12, "h": 1 },
+          { "label": "project stamps row", "x": 0, "y": 7, "w": 12, "h": 3 }
+        ]
+      }
+    },
+    {
+      "id": "model-pick",
+      "label": "Systems Architecture Diagram",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "the whiteboard system-design diagram engineers draw daily",
+      "thesis": "The page itself is a system diagram — Hero, Work, Experience, Skills, and Contact as connected service nodes a recruiter reads the way they'd read a design doc.",
+      "palette": ["#0d1117", "#e6edf3", "#3fb950", "#d29922"],
+      "materials": ["monospace labels", "connector lines", "node cards", "status-dot states"],
+      "viewport": "A legend rail at left naming every node; a central canvas of connected boxes (Work, Experience, Skills, Contact) wired to a Hero root node; a status/data-flow strip beneath.",
+      "risk": "Diagram-as-navigation is a familiar move within developer personal sites specifically — the safer, more expected read inside this exact audience, even though it's rare in hiring-facing portfolios broadly.",
+      "wireframe": {
+        "cols": 12, "rows": 10,
+        "regions": [
+          { "label": "legend / node key rail", "x": 0, "y": 0, "w": 2, "h": 10, "accent": true },
+          { "label": "connected system diagram (Hero root → Work/Experience/Skills/Contact nodes)", "x": 2, "y": 0, "w": 10, "h": 7 },
+          { "label": "status / data-flow footer strip", "x": 2, "y": 7, "w": 10, "h": 3 }
+        ]
+      }
+    },
+    {
+      "id": "challenger-scientific-notation-particle-detector-event-display",
+      "label": "Particle Detector Event Display",
+      "verdict": "competitive",
+      "lineage": "collider event displays, concentric detector rings around one frozen collision",
+      "thesis": "Career evidence reads like a detected event: concentric rings of Work, Experience, and Skills traced outward from one center.",
+      "palette": ["#07080b", "#4c6b8a", "#e8c419", "#c23b22"],
+      "materials": ["concentric ring diagram", "particle-track lines", "tabular momentum figures", "calorimeter bars"],
+      "case": "Fuses well on identification — the applied-physics background is real and specific to this person — but concentric rings ask more domain literacy than a general hiring audience brings; competitive, not a clean win on clarity.",
+      "risk": "A non-physicist recruiter may not parse concentric rings quickly without labels doing real work — clarity depends entirely on legible in-context labeling.",
+      "hero": "https://impeccable.style/worlds/cards/scientific-notation-particle-detector-event-display-hero.webp",
+      "wireframe": {
+        "cols": 12, "rows": 10,
+        "regions": [
+          { "label": "track / momentum data panel", "x": 0, "y": 0, "w": 2, "h": 10 },
+          { "label": "concentric detector-ring stage (career core)", "x": 2, "y": 0, "w": 8, "h": 8, "accent": true },
+          { "label": "calorimeter bar strip", "x": 2, "y": 8, "w": 8, "h": 2 }
+        ]
+      }
+    },
+    {
+      "id": "challenger-design-canon-swiss-grid-poster-wall",
+      "label": "Swiss Grid Poster Wall",
+      "verdict": "competitive",
+      "lineage": "Swiss International Style concert-poster series, one modular grid across the set",
+      "thesis": "One disciplined module governs every section — objective, flush-left, instantly scannable, nothing decorative.",
+      "palette": ["#f7f5f0", "#1a1a1a", "#d1281f"],
+      "materials": ["akzidenz-grotesk type", "modular grid", "geometric bar/arc accent", "flush-left ragged-right"],
+      "case": "Fuses cleanly: the grid disciplines every section into equally scannable units, matching ‘fast to evaluate’ directly; loses narrowly on narrative specificity to the actual moment of being evaluated for a role.",
+      "risk": "Reads as generic 'clean corporate' if the grid isn't pushed to genuine density and rigor — easy to under-commit into blandness.",
+      "hero": "https://impeccable.style/worlds/cards/design-canon-swiss-grid-poster-wall-hero.webp",
+      "wireframe": {
+        "cols": 12, "rows": 10,
+        "regions": [
+          { "label": "kicker / masthead line", "x": 0, "y": 0, "w": 12, "h": 1 },
+          { "label": "flush-left headline block", "x": 0, "y": 1, "w": 7, "h": 3 },
+          { "label": "geometric bar/arc accent", "x": 7, "y": 1, "w": 5, "h": 3, "accent": true },
+          { "label": "modular content grid", "x": 0, "y": 4, "w": 12, "h": 6 }
+        ]
+      }
+    },
+    {
+      "id": "challenger-webgl-shader-portal",
+      "verdict": "declined",
+      "label": "WebGL Shader Portal",
+      "lineage": "full-bleed GPU shader scenes behind thin floating type",
+      "palette": ["#0a0a12", "#e8e8f0", "#ff6a3d"],
+      "materials": ["fragment shader", "film grain", "custom cursor"],
+      "case": "Fuses poorly: a recruiter needs fast, scannable evidence, not an immersive shader environment to navigate through, and the motion/performance risk works against 'fast to evaluate'.",
+      "kept": "One oversized, fully committed hero moment.",
+      "hero": "https://impeccable.style/worlds/cards/webgl-shader-portal-hero.webp"
+    },
+    {
+      "id": "challenger-cinema-cinematography-editing-hand-processed-film-bloom",
+      "verdict": "declined",
+      "label": "Hand-Processed Film",
+      "lineage": "16mm film strip with scratches, chemical bloom, and light leaks",
+      "palette": ["#8a8378", "#14100c", "#d97a34"],
+      "materials": ["emulsion grain", "sprocket margin", "light-leak flare"],
+      "case": "Fuses poorly: no tie to verifiable technical evidence, and visual noise works against legibility for a hiring evaluation.",
+      "kept": "Material wear as literal proof of history — accumulated marks recording real time passing.",
+      "hero": "https://impeccable.style/worlds/cards/cinema-cinematography-editing-hand-processed-film-bloom-hero.webp"
+    },
+    {
+      "id": "challenger-light-shadow-caustics-rain-night-cityscape",
+      "verdict": "declined",
+      "label": "Rain-Dark Cityscape",
+      "lineage": "a skyline passing from blue hour into rain-dark night",
+      "palette": ["#0b1a33", "#d99a3d", "#c7ccd6"],
+      "materials": ["skyline silhouette", "transit-light veins", "wet-street reflection"],
+      "case": "Fuses poorly: mood-first and thematically distant from proving technical competence to a hiring audience; over-engineered for the actual task.",
+      "kept": "Layered states synchronized on one shared axis instead of two independent toggles.",
+      "hero": "https://impeccable.style/worlds/cards/light-shadow-caustics-rain-night-cityscape-hero.webp"
+    },
+    {
+      "id": "challenger-pop-culture-shelf-saturday-title-card",
+      "verdict": "declined",
+      "label": "Saturday-Morning Title Card",
+      "lineage": "cel-paint cartoon title cards with a starburst logotype",
+      "palette": ["#ffd23f", "#1560bd", "#111111"],
+      "materials": ["cel-paint primaries", "chunky outline logotype", "VHS chroma bleed"],
+      "case": "Fuses poorly: playful consumer-entertainment tone directly undercuts credibility for a full-time hiring decision.",
+      "kept": "A distinct transition beat between sections, not one uniform fade repeated everywhere.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-saturday-title-card-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code" },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "The clean modern developer-portfolio template — hairlines, serif display, cream ground — executed at full craft, played straight.",
+    "palette": ["#faf7f1", "#14130f", "#b8552c"],
+    "materials": ["hairline dividers", "editorial serif display", "mono labels"],
+    "viewport": "The arrangement this category always ships: left-aligned hero, portrait right, hairline-divided list sections below.",
+    "risk": "Indistinguishable from the competition by design — this is the site's current look, offered straight rather than replaced."
+  },
+  "steer": true
+}

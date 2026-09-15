@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Zilla_Slab, Public_Sans, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import React from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -60,6 +61,7 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );

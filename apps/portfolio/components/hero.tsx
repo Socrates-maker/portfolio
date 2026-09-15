@@ -12,7 +12,7 @@ const FIELD_LABEL =
 const FIELD_VALUE = "font-serif font-semibold";
 
 const BTN =
-  "appearance-none cursor-pointer font-mono text-[11px] md:text-[13px] leading-none font-semibold tracking-[0.05em] uppercase px-[22px] py-3.5 rounded-[3px] inline-flex items-center gap-2.5 transition-[transform,background-color,color,border-color] duration-200 no-underline border-2 border-transparent group";
+  "appearance-none cursor-pointer whitespace-nowrap font-mono text-[9.5px] md:text-[13px] leading-none font-semibold tracking-[0.02em] md:tracking-[0.05em] uppercase px-2 md:px-[22px] py-3.5 rounded-[3px] inline-flex items-center justify-center gap-1.5 md:gap-2.5 transition-[transform,background-color,color,border-color] duration-200 no-underline border-2 border-transparent group";
 
 export function Hero() {
   const t = useTranslations();
@@ -95,30 +95,30 @@ export function Hero() {
             </span>
           </div>*/}
 
-          <div className="px-[clamp(24px,4vw,40px)] pb-[clamp(28px,4vw,40px)]">
-            <div className="flex gap-2 md:gap-3 mt-7 flex-wrap ">
+          <div className="w-full md:w-auto px-[clamp(24px,4vw,40px)] pb-[clamp(28px,4vw,40px)]">
+            <div className="flex gap-1.5 md:gap-3 mt-7 flex-nowrap">
               <a
                 href="#contact"
-                className={`${BTN} relative bg-stamp/9 text-stamp border-stamp [transform:rotate(-1.2deg)] [filter:url(#ink-rough-lg)] after:content-[''] after:absolute after:inset-1 after:rounded-sm after:border after:border-stamp after:pointer-events-none hover:[transform:rotate(-1.2deg)_translateY(-1px)] hover:bg-stamp/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2`}
+                className={`${BTN} flex-1 md:flex-none relative bg-stamp/9 text-stamp border-stamp [transform:rotate(-1.2deg)] [filter:url(#ink-rough-lg)] after:content-[''] after:absolute after:inset-1 after:rounded-sm after:border after:border-stamp after:pointer-events-none hover:[transform:rotate(-1.2deg)_translateY(-1px)] hover:bg-stamp/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2`}
               >
                 {t("hero.ctaPrimary")}
                 <span
                   className="inline-flex transition-transform duration-200 group-hover:translate-x-[3px]"
                   aria-hidden="true"
                 >
-                  <ArrowIcon className="w-3.5 h-3.5" />
+                  <ArrowIcon className="w-2.5 h-2.5 md:w-3.5 md:h-3.5" />
                 </span>
               </a>
               <a
                 href="#work"
-                className={`${BTN} bg-transparent text-fg border-fg hover:bg-fg/6 focus-visible:outline focus-visible:outline-gold focus-visible:outline-offset-2`}
+                className={`${BTN} flex-1 md:flex-none bg-transparent text-fg border-fg hover:bg-fg/6 focus-visible:outline focus-visible:outline-gold focus-visible:outline-offset-2`}
               >
                 {t("hero.ctaSecondary")}
                 <span
                   className="inline-flex [transform:rotate(90deg)] transition-transform duration-200 group-hover:[transform:rotate(90deg)_translateX(3px)]"
                   aria-hidden="true"
                 >
-                  <ArrowIcon className="w-3.5 h-3.5" />
+                  <ArrowIcon className="w-2.5 h-2.5 md:w-3.5 md:h-3.5" />
                 </span>
               </a>
             </div>

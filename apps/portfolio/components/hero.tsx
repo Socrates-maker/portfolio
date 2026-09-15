@@ -35,9 +35,9 @@ export function Hero() {
                 className="object-cover object-top"
               />
             </div>
-            <div className="font-mono text-[9px] tracking-[0.16em] uppercase text-fg-soft text-center mt-2 max-tablet:w-[148px] max-tablet:mx-auto">
+            {/*    <div className="font-mono text-[9px] tracking-[0.16em] uppercase text-fg-soft text-center mt-2 max-tablet:w-[148px] max-tablet:mx-auto">
               {t("hero.photoCaption")}
-            </div>
+            </div>*/}
           </div>
 
           <div className="flex flex-col">

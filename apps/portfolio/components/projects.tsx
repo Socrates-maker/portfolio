@@ -4,7 +4,6 @@ import type { Locale } from "@/lib/locale";
 import { getFeaturedProjects } from "@/lib/db/queries";
 import { Reveal } from "@/components/reveal";
 import { ProjectList } from "@/components/project-list";
-import { ExternalArrowIcon } from "@/components/icons/arrow-icon";
 
 export async function Projects() {
   const t = await getTranslations();

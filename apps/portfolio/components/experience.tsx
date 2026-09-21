@@ -55,10 +55,10 @@ export async function Experience() {
             </div>
             <div className="flex flex-col gap-1.5 font-mono text-[10px] text-fg-soft tracking-[0.06em] uppercase text-right max-tablet:flex-row max-tablet:flex-wrap max-tablet:gap-x-3 max-tablet:gap-y-1 max-tablet:text-left max-tablet:mt-1">
               <span>{e.location[locale]}</span>
-              <span>
+              {/* <span>
                 {t("ui.entryLabel")} {String(i + 1).padStart(2, "0")} /{" "}
                 {String(total).padStart(2, "0")}
-              </span>
+              </span>*/}
             </div>
           </div>
         ))}

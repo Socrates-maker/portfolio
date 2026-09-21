@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "Socrates Ekpaliguidime — Développeur logiciel",
+    "title": "Socrates Ekpaliguidime — Full-Stack Developer · Cloud & DevOps ",
     "description": "Portfolio de Socrates Ekpaliguidime — développeur logiciel full-stack basé à Cotonou, au Bénin."
   },
   "nav": {
@@ -14,9 +14,9 @@
   },
   "hero": {
     "eyebrow": "Cotonou, Bénin",
-    "role": "Développeur logiciel",
+    "role": "Developpeur Full-Stack  · Cloud & DevOps",
     "roleAccent": "full-stack",
-    "bio": "Je conçois des applications web fiables avec React, Next.js et NestJS. J'aide des startups à transformer des idées en produits concrets — du design d'API aux interfaces, en passant par l'automatisation des déploiements.",
+    "bio": "Je suis développeur Full-Stack basé au Bénin ; je me consacre à la création d'applications web modernes tout en me spécialisant progressivement dans l'ingénierie Cloud et le DevOps.\n\nJe conçois des applications web et des produits numériques fiables,\ncouvrant l'ensemble du cycle, des interfaces frontend et des API jusqu'au CI/CD et au déploiement dans le cloud.",
     "footnote": "Physique appliquée → ingénierie logicielle.",
     "ctaPrimary": "Me contacter",
     "ctaSecondary": "Voir les projets",

@@ -21,6 +21,16 @@ export const SITE = {
         handle: "@ekpaliguidime",
         url: "https://x.com/ekpaliguidime",
       },
+      {
+        label: "Github",
+        handle: "@ekpaliguidime",
+        url: "https://github.com/Socrates-maker",
+      },
+      {
+        label: "Gitlab",
+        handle: "@ekpaliguidime",
+        url: "https://gitlab.com/sekpaliguidime",
+      },
     ],
   },
 } as const;

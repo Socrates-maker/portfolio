@@ -1,9 +1,10 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { startTransition, useActionState, useEffect, useRef, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/reveal";
 import { SITE } from "@/lib/site";
+import { sendContactMessage, type ContactState } from "@/app/(site)/contact-actions";
 
 const LABEL = "font-mono text-[13px] text-muted";
 const FIELD =
@@ -12,18 +13,23 @@ const FIELD =
 export function Contact() {
   const t = useTranslations();
 
-  // No backend for the form: compose a mailto: so the visitor's own mail
-  // client sends it, prefilled with what they typed.
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction, pending] = useActionState<ContactState, FormData>(
+    sendContactMessage,
+    { status: "idle" }
+  );
+
+  // Dispatch manually instead of <form action>: React resets a form after an
+  // action runs, which would wipe the visitor's message when sending fails.
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
-    const subject = t("contactForm.subject", { name: name || email });
-    const body = `${message}\n\n— ${name}${email ? ` <${email}>` : ""}`;
-    window.location.href = `mailto:${SITE.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    startTransition(() => formAction(data));
   };
+
+  useEffect(() => {
+    if (state.status === "success") formRef.current?.reset();
+  }, [state]);
 
   return (
     <section id="contact" className="border-t border-line">
@@ -65,9 +71,16 @@ export function Contact() {
           className="flex-[1_1_420px] min-w-0 max-[960px]:basis-full max-[960px]:w-full max-[960px]:max-w-[640px] max-[960px]:mx-auto"
         >
           <form
+            ref={formRef}
             onSubmit={onSubmit}
-            className="flex flex-col gap-[18px] p-8 bg-surface border border-line rounded-2xl max-[640px]:p-5"
+            className="relative flex flex-col gap-[18px] p-8 bg-surface border border-line rounded-2xl max-[640px]:p-5"
           >
+            {/* Honeypot — invisible to people and screen readers. */}
+            <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+              {/* Deliberately not "company"/"website": browser autofill fills those. */}
+              <label htmlFor="contact-botcheck">Leave empty</label>
+              <input id="contact-botcheck" name="botcheck" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="contact-name" className={LABEL}>
                 {t("contactForm.name")}
@@ -91,6 +104,7 @@ export function Contact() {
                 name="email"
                 type="email"
                 autoComplete="email"
+                required
                 placeholder={t("contactForm.emailPlaceholder")}
                 className={`${FIELD} min-h-12`}
               />
@@ -110,10 +124,25 @@ export function Contact() {
             </div>
             <button
               type="submit"
-              className="min-h-[52px] bg-accent text-on-accent border-0 rounded-[10px] [font:inherit] font-medium cursor-pointer transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-fg focus-visible:outline-offset-2"
+              disabled={pending}
+              className="min-h-[52px] bg-accent text-on-accent border-0 rounded-[10px] [font:inherit] font-medium cursor-pointer transition-opacity hover:opacity-85 disabled:opacity-60 disabled:cursor-wait focus-visible:outline-2 focus-visible:outline-fg focus-visible:outline-offset-2"
             >
-              {t("contactForm.send")}
+              {pending ? t("contactForm.sending") : t("contactForm.send")}
             </button>
+
+            <p role="status" aria-live="polite" className="m-0 min-h-6 text-[15px]">
+              {state.status === "success" && (
+                <span className="text-fg">
+                  <span className="inline-block w-2 h-2 mr-2 rounded-full bg-accent align-middle" aria-hidden="true" />
+                  {t("contactForm.success")}
+                </span>
+              )}
+              {state.status === "error" && (
+                <span className="text-[#b42318] dark:text-[#ff8a7a]">
+                  {state.error === "invalid" ? t("contactForm.invalid") : t("contactForm.failed")}
+                </span>
+              )}
+            </p>
           </form>
         </Reveal>
       </div>

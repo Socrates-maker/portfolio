@@ -2,11 +2,19 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { SITE } from "@/lib/site";
 
 function Sparkle({ className }: { className: string }) {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className={`absolute text-accent ${className}`}>
-      <path d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z" fill="currentColor" />
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className={`absolute text-accent ${className}`}
+    >
+      <path
+        d="M12 0C13 7 17 11 24 12C17 13 13 17 12 24C11 17 7 13 0 12C7 11 11 7 12 0Z"
+        fill="currentColor"
+      />
     </svg>
   );
 }
@@ -17,16 +25,23 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="max-w-[1200px] mx-auto px-6 pt-24 pb-[88px] flex flex-wrap items-end gap-14 max-[1100px]:pt-16 max-[1100px]:pb-[72px] max-[1100px]:gap-12 max-[1100px]:justify-center max-[640px]:px-4 max-[640px]:pt-10 max-[640px]:pb-14 max-[640px]:gap-10"
+      className="scroll-mt-[200px] max-w-[1200px] mx-auto px-6 pt-16 pb-[88px] flex flex-wrap items-center gap-14 max-[1100px]:pt-16 max-[1100px]:pb-[72px] max-[1100px]:gap-12 max-[1100px]:justify-center max-[640px]:px-4 max-[640px]:pt-10 max-[640px]:pb-14 max-[640px]:gap-10"
     >
-      <div className="hero-enter flex-[999_1_560px] min-w-0 flex flex-col gap-7 max-[1100px]:basis-full max-[1100px]:items-center max-[1100px]:text-center">
-        <h1 className="m-0 font-bold text-[clamp(40px,7vw,96px)] leading-[0.98] tracking-[-0.035em] whitespace-pre-line">
-          {t("title")}
-        </h1>
+      <div className="hero-enter  flex-[999_1_560px] min-w-0 flex flex-col gap-7 max-[1100px]:basis-full max-[1100px]:items-center max-[1100px]:text-center">
+        <div className="flex flex-col gap-4">
+          <h1 className="m-0 font-bold text-[clamp(40px,7vw,96px)] leading-[0.98] tracking-[-0.035em]">
+            {SITE.nameFirst}
+            <br />
+            {SITE.nameLast}
+          </h1>
+          <p className="m-0 font-medium text-[clamp(22px,2.6vw,34px)] leading-[1.15] tracking-[-0.02em]">
+            {t("role")}
+          </p>
+        </div>
         <p className="m-0 max-w-[620px] text-[21px] leading-normal text-muted max-[1100px]:mx-auto max-[640px]:text-lg">
           {t("bio")}
         </p>
-        <div className="flex flex-wrap gap-3 mt-2 max-[1100px]:justify-center max-[640px]:w-full">
+        <div className="flex flex-wrap gap-3 mt-2 max-[1100px]:justify-center max-[640px]:w-full ">
           <a
             href="#work"
             className="inline-flex items-center justify-center min-h-[52px] px-[26px] bg-accent text-on-accent rounded-[10px] no-underline font-medium transition-opacity hover:opacity-85 max-[640px]:flex-[1_1_100%]"
@@ -60,7 +75,10 @@ export function Hero() {
           </div>
 
           <div className="absolute -left-5 top-[22%] w-[132px] h-[132px] rounded-full bg-fg text-bg flex flex-col items-center justify-center gap-2 p-4 box-border text-center -rotate-9 text-[13px] font-bold leading-[1.2] tracking-[0.02em] uppercase max-[640px]:w-24 max-[640px]:h-24 max-[640px]:p-2.5 max-[640px]:text-[10px] max-[640px]:gap-[5px] max-[640px]:-left-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent" aria-hidden="true" />
+            <span
+              className="w-2.5 h-2.5 rounded-full bg-accent"
+              aria-hidden="true"
+            />
             <span>{t("badge")}</span>
           </div>
 

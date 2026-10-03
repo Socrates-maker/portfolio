@@ -38,6 +38,7 @@ export function SiteHeader({ cvUrl }: { cvUrl: string | null }) {
   // first. "Work" itself just marks as active — it already is the page.
   const prefix = isWorkPage ? "/" : "";
   const navLinks = [
+    { href: `${prefix}#top`, label: t("home"), active: false },
     {
       href: isWorkPage ? "/work" : "#work",
       label: t("work"),
@@ -57,7 +58,7 @@ export function SiteHeader({ cvUrl }: { cvUrl: string | null }) {
           className="flex items-center gap-2.5 shrink-0 no-underline font-mono text-[15px] font-medium"
         >
           <span
-            className="inline-flex w-9 h-9 items-center justify-center rounded-lg bg-accent text-on-accent font-bold text-[18px]"
+            className="inline-flex w-9 h-9 items-center justify-center rounded-lg bg-accent text-on-accent font-extrabold text-[18px]"
             aria-hidden="true"
           >
             {SITE.nameFirst.charAt(0)}

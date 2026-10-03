@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Socrates Ekpaliguidime — Software developer",
-    "description": "Portfolio of Socrates Ekpaliguidime — full-stack software developer based in Cotonou, Benin."
+    "description": "Portfolio of Socrates Ekpaliguidime full-stack software developer based in Cotonou, Benin."
   },
   "nav": {
     "home": "Home",
@@ -18,7 +18,7 @@
   },
   "hero": {
     "role": "Full‑stack developer · Cloud & DevOps",
-    "bio": "Based in Benin, I build modern, reliable web applications — from frontend interfaces and APIs to CI/CD and cloud deployment — while progressively specializing in Cloud Engineering and DevOps.",
+    "bio": "Based in Benin, I build modern, reliable web applications from frontend interfaces and APIs to CI/CD and cloud deployment while progressively specializing in Cloud Engineering and DevOps.",
     "ctaPrimary": "See my work →",
     "ctaSecondary": "Get in touch",
     "photoAlt": "Portrait of Socrates Ekpaliguidime",

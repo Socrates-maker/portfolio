@@ -1,10 +1,12 @@
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { getCvUrl } from "@/lib/db/queries";
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+  const cvUrl = await getCvUrl();
   return (
     <>
-      <SiteHeader />
+      <SiteHeader cvUrl={cvUrl} />
       <main>{children}</main>
       <SiteFooter />
     </>

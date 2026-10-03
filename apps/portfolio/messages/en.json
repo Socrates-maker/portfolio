@@ -4,47 +4,60 @@
     "description": "Portfolio of Socrates Ekpaliguidime — full-stack software developer based in Cotonou, Benin."
   },
   "nav": {
-    "work": "Work",
+    "work": "Projects",
+    "skills": "Skills",
     "experience": "Experience",
-    "skills": "Stack",
-    "contact": "Contact"
-  },
-  "header": {
-    "availability": "Available for work · 2026"
+    "contact": "Contact",
+    "cv": "View my CV ↗",
+    "language": "Language",
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
-    "eyebrow": "Cotonou, Benin",
-    "role": "Full-Stack Developer · Cloud & DevOps",
-    "roleAccent": "full-stack",
-    "bio": "I'm a Full-Stack Developer based in Benin, focused on building modern web applications and progressively specializing in Cloud Engineering and DevOps.\n\n I build reliable web applications and digital products,\nfrom frontend interfaces and APIs to CI/CD and cloud deployment.",
-    "footnote": "Applied physics → software engineering.",
-    "ctaPrimary": "Get in touch",
-    "ctaSecondary": "See projects",
-    "photoCaption": "Photo · 2025"
+    "title": "Socrates Ekpaliguidime,\nfull‑stack developer.",
+    "bio": "Based in Benin, I build modern, reliable web applications — from frontend interfaces and APIs to CI/CD and cloud deployment — while progressively specializing in Cloud Engineering and DevOps.",
+    "ctaPrimary": "See my work →",
+    "ctaSecondary": "Get in touch",
+    "photoAlt": "Portrait of Socrates Ekpaliguidime",
+    "avatarAlt": "Illustrated avatar of Socrates Ekpaliguidime",
+    "badge": "Open to collaborate",
+    "tag": "Full-stack · Cloud"
   },
   "sections": {
-    "workTitle": "Recent work",
-    "workIntro": "A few products I've been lucky to ship in the past few years.",
+    "workEyebrow": "01 / Projects",
+    "workTitle": "Selected work",
+    "featured": "Featured project",
     "allWorkTitle": "All projects",
     "allWorkIntro": "The full list — everything I've shipped, not just the highlights.",
-    "experienceTitle": "Where I've built",
-    "skillsTitle": "What I work with",
+    "skillsEyebrow": "02 / Skills",
+    "skillsTitle": "My toolbox",
     "skillsIntro": "Not an exhaustive list — what I use day to day, with confidence.",
-    "contactTitle": "Want to build something together?",
+    "experienceEyebrow": "03 / Experience",
+    "experienceTitle": "Experience",
+    "contactEyebrow": "04 / Contact",
+    "contactTitle": "Let’s work together.",
     "contactBody": "Open to full-stack contracts, technical consulting, or just a chat about a product idea. I usually reply within 24h."
   },
+  "contactForm": {
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Tell me about your project…",
+    "send": "Send message →",
+    "subject": "Getting in touch — {name}"
+  },
   "footer": {
-    "copy": "© 2026 Socrates Ekpaliguidime"
+    "copy": "© 2026 Socrates Ekpaliguidime",
+    "madeBy": "Designed and built by Socrates Ekpaliguidime"
   },
   "ui": {
-    "visitSite": "Visit live site",
-    "viewAllProjects": "View all projects",
-    "backToHome": "Back to home",
-    "fieldName": "Name",
-    "fieldProfession": "Profession",
-    "fieldLocation": "Location",
-    "fieldRemarks": "Remarks",
-    "fieldPriorField": "Prior field",
-    "entryLabel": "Entry"
+    "visitSite": "Visit live site ↗",
+    "viewAllProjects": "View all projects →",
+    "backToHome": "← Back to home",
+    "screenshot": "Screenshot of {title}"
   }
 }

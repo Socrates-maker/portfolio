@@ -6,59 +6,24 @@
 
 /* ─────────────────────────  THEME — Tailwind tokens  ───────────────────────── */
 @theme {
-  --color-bg:               #f2ecd9; /* security-paper cream */
-  --color-bg-2:             #e8dfc2; /* deeper paper for panels/annex */
-  --color-cover:            #1a2942; /* passport-cover navy */
-  --color-cover-2:          #24345a; /* lighter navy for hover/rows */
-  --color-fg:               #14171c; /* ink */
-  --color-fg-muted:         #4d5258;
-  --color-fg-soft:          #5b5740; /* warm khaki, tuned to clear AA on both bg and bg-2 */
-  --color-hairline:         #cfc4a0;
-  --color-hairline-strong:  #ab9c68;
-  --color-stamp:            #a52328; /* stamp red — darkened from #b7282e for AA contrast on cream */
-  --color-gold:             #684c17; /* foil gold, for text on bg/bg-2 (cream) */
-  --color-gold-on-cover:    #d4ac57; /* brighter gold for text on cover (always dark navy) */
-  --color-on-cover:         #f2ecd9; /* text on navy cover */
-  --color-on-stamp:         #f8f1df;
+  --color-bg:        #0e0f11;
+  --color-surface:   #16181b;
+  --color-fg:        #eceae4;
+  --color-muted:     #a0a09a;
+  --color-line:      #2a2d31;
+  --color-accent:    #c8f560; /* lime — always paired with on-accent text */
+  --color-on-accent: #0e0f11;
 
-  --font-sans:  var(--font-public-sans), "Public Sans", system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-zilla-slab), "Zilla Slab", Georgia, serif;
-  --font-mono:  var(--font-courier-prime), "Courier Prime", ui-monospace, SFMono-Regular, monospace;
-
-  --breakpoint-phone:  720px;
-  --breakpoint-tablet: 880px;
+  --font-sans: var(--font-space-grotesk), "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-[data-theme="dark"] {
-  /* night-desk / UV-inspection mode — the record examined under lamp light */
-  --color-bg:               #101319;
-  --color-bg-2:             #171b23;
-  --color-cover:            #0a0e18;
-  --color-cover-2:          #141a29;
-  --color-fg:               #ece7d6;
-  --color-fg-muted:         #a7a48f;
-  --color-fg-soft:          #87826f; /* lifted for AA contrast on dark bg */
-  --color-hairline:         #2c2f26;
-  --color-hairline-strong:  #45412a;
-  --color-stamp:            #e2555c; /* lifted for AA contrast on dark bg */
-  --color-gold:             #d4ac57; /* lifted for AA contrast on dark bg */
-  --color-gold-on-cover:    #d4ac57;
-  --color-on-cover:         #ece7d6;
-  --color-on-stamp:         #17070a;
-}
-
-/* ─────────────────────────  LAYOUT TOKENS (fluid, referenced via arbitrary values)  ───────────────────────── */
-:root {
-  --watermark: color-mix(in oklab, var(--color-cover) 6%, transparent);
-  --col: min(1180px, 92vw);
-  --col-narrow: min(960px, 90vw);
-  --section-y: clamp(72px, 10vh, 140px);
-}
-@media (max-width: 720px) {
-  :root { --section-y: clamp(40px, 5vh, 64px); }
-}
-[data-theme="dark"] {
-  --watermark: color-mix(in oklab, var(--color-gold) 7%, transparent);
+[data-theme="light"] {
+  --color-bg:      #f5f4f0;
+  --color-surface: #ffffff;
+  --color-fg:      #15171a;
+  --color-muted:   #585a5f;
+  --color-line:    #d9d7d1;
 }
 
 /* ─────────────────────────  BASE  ─────────────────────────
@@ -68,43 +33,39 @@
    colored link outside the public site's own token system. */
 @layer base {
   html { scroll-behavior: smooth; }
-  ::selection { background: var(--color-stamp); color: var(--color-on-stamp); }
+  ::selection { background: var(--color-accent); color: var(--color-on-accent); }
   a { color: inherit; }
-  section[id] { scroll-margin-top: 88px; }
+  section[id] { scroll-margin-top: 24px; }
 }
 
-.paper-grid {
-  background-image:
-    repeating-linear-gradient(0deg, var(--watermark) 0px, var(--watermark) 1px, transparent 1px, transparent 64px),
-    repeating-linear-gradient(90deg, var(--watermark) 0px, var(--watermark) 1px, transparent 1px, transparent 64px);
+/* Diagonal hatch used behind missing project screenshots. */
+.hatch {
+  background-image: repeating-linear-gradient(135deg, var(--color-line) 0 1px, transparent 1px 14px);
+}
+
+/* Arched portrait frame from the hero. */
+.arch {
+  border-radius: 50% 50% 28px 28px / 36% 36% 28px 28px;
 }
 
 /* ─────────────────────────  ENTRY / REVEAL ANIMATION  ───────────────────────── */
 @keyframes heroEnter {
-  from { opacity: 0; transform: translateY(10px) scale(.99); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .hero-enter {
   animation: heroEnter .7s cubic-bezier(.2,.8,.3,1) both;
 }
-@media (prefers-reduced-motion: reduce) {
-  .hero-enter { animation: none; }
-}
 
-@keyframes liveBlink {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.3; }
-}
-
-/* Scroll reveal — stamp-press impact. SSR renders full opacity;
+/* Scroll reveal. SSR renders full opacity;
    JS adds .reveal after mount, then .in when the element intersects. */
 .reveal {
   opacity: 0;
-  transform: scale(1.06);
-  transition: opacity .4s ease, transform .45s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(14px);
+  transition: opacity .5s ease, transform .6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.in {
-  opacity: 1; transform: scale(1);
+  opacity: 1; transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal {

@@ -1,7 +1,17 @@
 import { cacheTag } from "next/cache";
 import { and, asc, eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { experiences, projects, skillGroups } from "@/lib/db/schema";
+import { experiences, projects, settings, skillGroups } from "@/lib/db/schema";
+
+export const CV_SETTING = "cvUrl";
+
+/** Public URL of the uploaded CV, or null when none has been uploaded. */
+export async function getCvUrl() {
+  "use cache";
+  cacheTag("settings");
+  const [row] = await db.select().from(settings).where(eq(settings.key, CV_SETTING));
+  return row?.value ?? null;
+}
 
 /** Public site: published projects only. */
 export async function getProjects() {

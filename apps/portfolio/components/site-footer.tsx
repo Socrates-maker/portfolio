@@ -3,11 +3,12 @@
 import { useTranslations } from "next-intl";
 
 export function SiteFooter() {
-  const t = useTranslations();
+  const t = useTranslations("footer");
   return (
-    <footer className="border-t-[3px] border-double border-gold-on-cover bg-cover text-on-cover/65 py-7 font-mono text-[10.5px] tracking-[0.06em] uppercase">
-      <div className="w-[var(--col)] mx-auto flex justify-center gap-[18px] flex-wrap text-center">
-        <span>{t("footer.copy")}</span>
+    <footer className="border-t border-line">
+      <div className="max-w-[1200px] mx-auto px-6 py-7 flex flex-wrap justify-between gap-3 font-mono text-[13px] text-muted max-[640px]:px-4 max-[640px]:py-6 max-[640px]:flex-col max-[640px]:items-center max-[640px]:text-center">
+        <span>{t("copy")}</span>
+        <span>{t("madeBy")}</span>
       </div>
     </footer>
   );

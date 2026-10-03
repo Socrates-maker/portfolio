@@ -1,93 +1,122 @@
 "use client";
 
+import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/reveal";
-import { ExternalArrowIcon } from "@/components/icons/arrow-icon";
 import { SITE } from "@/lib/site";
+
+const LABEL = "font-mono text-[13px] text-muted";
+const FIELD =
+  "px-3.5 bg-bg text-fg border border-line rounded-[10px] [font:inherit] text-base placeholder:text-muted/70 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1";
 
 export function Contact() {
   const t = useTranslations();
 
-  return (
-    <section className="bg-cover text-on-cover" id="contact">
-      <div className="w-[var(--col)] mx-auto py-[clamp(64px,9vh,120px)]">
-        <Reveal as="div">
-          <h2 className="font-serif font-semibold text-[clamp(32px,5vw,68px)] leading-[1.04] tracking-[-0.012em] max-w-[18ch] text-on-cover max-phone:text-center">
-            {renderContactTitle(t("sections.contactTitle"))}
-          </h2>
-        </Reveal>
+  // No backend for the form: compose a mailto: so the visitor's own mail
+  // client sends it, prefilled with what they typed.
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+    const subject = t("contactForm.subject", { name: name || email });
+    const body = `${message}\n\n— ${name}${email ? ` <${email}>` : ""}`;
+    window.location.href = `mailto:${SITE.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
 
+  return (
+    <section id="contact" className="border-t border-line">
+      <div className="max-w-[1200px] mx-auto px-6 py-[88px] flex flex-wrap gap-14 max-[640px]:px-4 max-[640px]:py-14 max-[640px]:gap-8">
         <Reveal
           as="div"
-          className="grid grid-cols-[1.3fr_1fr] gap-[clamp(28px,5vw,80px)] mt-[clamp(32px,5vh,56px)] items-end max-phone:grid-cols-1 max-phone:gap-8 [&>*]:min-w-0 "
-          delayMs={120}
+          className="flex-[1_1_400px] min-w-0 flex flex-col gap-5 max-[960px]:basis-full max-[960px]:items-center max-[960px]:text-center"
         >
-          <div className="max-phone:text-center">
-            <p className="font-sans text-[15.5px] leading-[1.6] text-on-cover/75 max-w-[48ch] ">
-              {t("sections.contactBody")}
-            </p>
-            <a
-              className="group  inline-flex items-center gap-3.5 max-w-full font-mono font-bold text-[clamp(15px,1.6vw,19px)] [overflow-wrap:anywhere] mt-6 px-[22px] py-3.5 border-2 border-gold-on-cover rounded-[3px] no-underline text-gold-on-cover transition-colors duration-200 hover:bg-gold-on-cover hover:text-cover focus-visible:outline focus-visible:outline-2 focus-visible:outline-on-cover focus-visible:outline-offset-2"
-              href={`mailto:${SITE.contact.email}`}
-            >
-              <span>{SITE.contact.email}</span>
-              <span
-                className="inline-flex transition-transform duration-200 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
-                aria-hidden="true"
-              >
-                <ExternalArrowIcon className="w-4 h-4" />
-              </span>
-            </a>
-          </div>
-
-          <div className="flex flex-col border-t border-dashed border-on-cover/30">
+          <span className="font-mono text-sm text-muted">{t("sections.contactEyebrow")}</span>
+          <h2 className="m-0 font-bold text-[clamp(38px,5.5vw,72px)] leading-none tracking-[-0.035em]">
+            {t("sections.contactTitle")}
+          </h2>
+          <p className="m-0 text-muted max-w-[440px] max-[960px]:max-w-[520px]">{t("sections.contactBody")}</p>
+          <a
+            href={`mailto:${SITE.contact.email}`}
+            className="self-start py-2 text-[22px] font-medium no-underline border-b-2 border-accent [overflow-wrap:anywhere] hover:opacity-75 max-[960px]:self-center max-[640px]:text-[19px]"
+          >
+            {SITE.contact.email}
+          </a>
+          <div className="flex flex-wrap gap-2.5 mt-2 max-[960px]:justify-center">
             {SITE.contact.socials.map((s) => (
               <a
                 key={s.label}
-                className="group/social block border-b border-dashed border-on-cover/30 no-underline text-on-cover overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-on-cover focus-visible:-outline-offset-2"
                 href={s.url}
                 target="_blank"
                 rel="noreferrer noopener"
+                className="inline-flex items-center gap-2 min-h-11 px-4 border border-line rounded-[10px] no-underline text-[15px] transition-colors hover:bg-fg/5"
               >
-                <span className="flex items-center justify-between gap-3 py-4 transition-[transform,color] duration-200 group-hover/social:translate-x-2 group-hover/social:text-gold-on-cover group-focus-visible/social:translate-x-2 group-focus-visible/social:text-gold-on-cover">
-                  <span className="font-serif font-semibold text-[19px] min-w-0">
-                    {s.label}
-                  </span>
-                  <span className="flex items-center gap-2 flex-wrap min-w-0">
-                    <span className="font-mono text-[11px] text-on-cover/60 [overflow-wrap:anywhere]">
-                      {s.handle}
-                    </span>
-                    <ExternalArrowIcon className="w-3.5 h-3.5 shrink-0" />
-                  </span>
-                </span>
+                {s.label}
+                <span aria-hidden="true">↗</span>
               </a>
             ))}
           </div>
         </Reveal>
+
+        <Reveal
+          as="div"
+          delayMs={120}
+          className="flex-[1_1_420px] min-w-0 max-[960px]:basis-full max-[960px]:w-full max-[960px]:max-w-[640px] max-[960px]:mx-auto"
+        >
+          <form
+            onSubmit={onSubmit}
+            className="flex flex-col gap-[18px] p-8 bg-surface border border-line rounded-2xl max-[640px]:p-5"
+          >
+            <div className="flex flex-col gap-2">
+              <label htmlFor="contact-name" className={LABEL}>
+                {t("contactForm.name")}
+              </label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                placeholder={t("contactForm.namePlaceholder")}
+                className={`${FIELD} min-h-12`}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="contact-email" className={LABEL}>
+                {t("contactForm.email")}
+              </label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder={t("contactForm.emailPlaceholder")}
+                className={`${FIELD} min-h-12`}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="contact-message" className={LABEL}>
+                {t("contactForm.message")}
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={5}
+                required
+                placeholder={t("contactForm.messagePlaceholder")}
+                className={`${FIELD} py-3 resize-y`}
+              />
+            </div>
+            <button
+              type="submit"
+              className="min-h-[52px] bg-accent text-on-accent border-0 rounded-[10px] [font:inherit] font-medium cursor-pointer transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-fg focus-visible:outline-offset-2"
+            >
+              {t("contactForm.send")}
+            </button>
+          </form>
+        </Reveal>
       </div>
     </section>
-  );
-}
-
-function renderContactTitle(text: string) {
-  const trimmed = text.trim();
-  const hasQ = trimmed.endsWith("?");
-  const stripped = hasQ ? trimmed.slice(0, -1) : trimmed;
-  const words = stripped.trim().split(" ");
-  if (words.length < 3) {
-    return (
-      <>
-        <em className="italic text-gold-on-cover">{stripped}</em>
-        {hasQ ? "?" : ""}
-      </>
-    );
-  }
-  const tail = words.slice(-2).join(" ");
-  const head = words.slice(0, -2).join(" ");
-  return (
-    <>
-      {head} <em className="italic text-gold-on-cover">{tail}</em>
-      {hasQ ? "?" : ""}
-    </>
   );
 }

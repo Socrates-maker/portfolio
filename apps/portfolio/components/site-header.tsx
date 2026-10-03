@@ -38,7 +38,11 @@ export function SiteHeader({ cvUrl }: { cvUrl: string | null }) {
   // first. "Work" itself just marks as active — it already is the page.
   const prefix = isWorkPage ? "/" : "";
   const navLinks = [
-    { href: isWorkPage ? "/work" : "#work", label: t("work"), active: isWorkPage },
+    {
+      href: isWorkPage ? "/work" : "#work",
+      label: t("work"),
+      active: isWorkPage,
+    },
     { href: `${prefix}#skills`, label: t("skills"), active: false },
     { href: `${prefix}#experience`, label: t("experience"), active: false },
     { href: `${prefix}#contact`, label: t("contact"), active: false },
@@ -53,13 +57,15 @@ export function SiteHeader({ cvUrl }: { cvUrl: string | null }) {
           className="flex items-center gap-2.5 shrink-0 no-underline font-mono text-[15px] font-medium"
         >
           <span
-            className="inline-flex w-9 h-9 items-center justify-center rounded-lg bg-accent text-on-accent font-medium"
+            className="inline-flex w-9 h-9 items-center justify-center rounded-lg bg-accent text-on-accent font-bold text-[18px]"
             aria-hidden="true"
           >
             {SITE.nameFirst.charAt(0)}
             {SITE.nameLast.charAt(0)}
           </span>
-          <span className="max-[480px]:hidden">{SITE.brandShort}</span>
+          <span className="max-[480px]:hidden uppercase font-bold text-[18px]">
+            {SITE.brandShort}
+          </span>
         </a>
 
         <div className="flex items-center justify-center gap-x-2 text-[15px] max-[960px]:hidden">
@@ -103,12 +109,32 @@ export function SiteHeader({ cvUrl }: { cvUrl: string | null }) {
             suppressHydrationWarning
           >
             {isDark ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.8}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <circle cx="12" cy="12" r="4" />
                 <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
               </svg>
             ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.8}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
               </svg>
             )}
@@ -122,8 +148,21 @@ export function SiteHeader({ cvUrl }: { cvUrl: string | null }) {
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" aria-hidden="true">
-              {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              {menuOpen ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
             </svg>
           </button>
 

@@ -1,0 +1,201 @@
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - navigation [ref=f1e3]:
+      - link "Socrates Ekpaliguidime" [ref=f1e4] [cursor=pointer]:
+        - /url: "#top"
+        - generic [aria-hidden] [ref=f1e5]: SE
+        - generic [ref=f1e6]: S. Ekpaliguidime
+      - generic [ref=f1e7]:
+        - link "Projets" [ref=f1e8] [cursor=pointer]:
+          - /url: "#work"
+        - link "Compétences" [ref=f1e9] [cursor=pointer]:
+          - /url: "#skills"
+        - link "Parcours" [ref=f1e10] [cursor=pointer]:
+          - /url: "#experience"
+        - link "Contact" [ref=f1e11] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=f1e12]:
+        - group "Langue" [ref=f1e13]:
+          - button "FR" [pressed] [ref=f1e14] [cursor=pointer]
+          - button "EN" [ref=f1e15] [cursor=pointer]
+        - button "Passer en mode clair" [ref=f1e16] [cursor=pointer]
+        - button "Ouvrir le menu" [ref=f1e20] [cursor=pointer]
+  - main [ref=f1e23]:
+    - generic [ref=f1e24]:
+      - generic [ref=f1e25]:
+        - heading "Socrates Ekpaliguidime, développeur full-stack." [level=1] [ref=f1e26]
+        - paragraph [ref=f1e27]: Basé au Bénin, je conçois des applications web modernes et fiables — des interfaces et API jusqu'au CI/CD et au déploiement dans le cloud — tout en me spécialisant progressivement dans l'ingénierie Cloud et le DevOps.
+        - generic [ref=f1e28]:
+          - link "Voir mes projets →" [ref=f1e29] [cursor=pointer]:
+            - /url: "#work"
+          - link "Me contacter" [ref=f1e30] [cursor=pointer]:
+            - /url: "#contact"
+      - generic [ref=f1e32]:
+        - img "Portrait de Socrates Ekpaliguidime" [ref=f1e35]
+        - generic [ref=f1e36]: Disponible pour collaborer
+        - generic [ref=f1e39]: Full-stack · Cloud
+    - generic [ref=f1e45]:
+      - generic [ref=f1e46]:
+        - generic [ref=f1e47]:
+          - generic [ref=f1e48]: 01 / Projets
+          - heading "Travaux sélectionnés" [level=2] [ref=f1e49]
+        - link "Voir tous les projets →" [ref=f1e50] [cursor=pointer]:
+          - /url: /work
+      - article [ref=f1e52]:
+        - img "Capture de Oriento Sup" [ref=f1e54]
+        - generic [ref=f1e55]:
+          - generic [ref=f1e56]:
+            - generic [ref=f1e57]: Projet vedette
+            - generic [ref=f1e58]: "2026"
+          - heading "Oriento Sup" [level=3] [ref=f1e59]
+          - paragraph [ref=f1e60]: Un projet personnelle mené de la conception au déployement.
+          - generic [ref=f1e61]:
+            - generic [ref=f1e62]: Nextjs
+            - generic [ref=f1e63]: NestJs
+            - generic [ref=f1e64]: vercel
+            - generic [ref=f1e65]: claude code
+          - link "Voir le site ↗" [ref=f1e67] [cursor=pointer]:
+            - /url: https://www.orientosup.com/
+      - generic [ref=f1e68]:
+        - article [ref=f1e69]:
+          - img "Capture de Foodally" [ref=f1e71]
+          - generic [ref=f1e72]:
+            - generic [ref=f1e73]:
+              - generic [ref=f1e74]: Foodally
+              - generic [ref=f1e75]: "2025"
+            - heading "Foodally" [level=3] [ref=f1e76]
+            - paragraph [ref=f1e77]: Foodally est une application qui vous permet à partir d'une photo de votre repas ses constituants pour suivre votre alimentation.
+            - generic [ref=f1e78]:
+              - generic [ref=f1e79]: Nextjs
+              - generic [ref=f1e80]: NestJs
+              - generic [ref=f1e81]: Mongodb
+              - generic [ref=f1e82]: AI integration
+            - link "Voir le site ↗" [ref=f1e83] [cursor=pointer]:
+              - /url: https://foodally.app/
+        - article [ref=f1e84]:
+          - generic [ref=f1e85]: "[Ce portfolio]"
+          - generic [ref=f1e87]:
+            - generic [ref=f1e88]:
+              - generic [ref=f1e89]: Portfolio
+              - generic [ref=f1e90]: "2025"
+            - heading "Ce portfolio" [level=3] [ref=f1e91]
+            - paragraph [ref=f1e92]: Ce projet constitue mon portfolio.
+            - generic [ref=f1e93]:
+              - generic [ref=f1e94]: Nextjs
+              - generic [ref=f1e95]: neon postgres
+              - generic [ref=f1e96]: vercel blob
+            - link "Voir le site ↗" [ref=f1e97] [cursor=pointer]:
+              - /url: https://www.socratesekpaliguidime.com/
+    - generic [ref=f1e99]:
+      - generic [ref=f1e100]:
+        - generic [ref=f1e101]:
+          - generic [ref=f1e102]: 02 / Compétences
+          - heading "Ma boîte à outils" [level=2] [ref=f1e103]
+        - paragraph [ref=f1e104]: Pas une liste exhaustive — ce que j'utilise au quotidien, en confiance.
+      - generic [ref=f1e105]:
+        - generic [ref=f1e106]:
+          - generic [ref=f1e107]: Frontend
+          - list [ref=f1e108]:
+            - listitem [ref=f1e109]: React
+            - listitem [ref=f1e110]: Next.js
+            - listitem [ref=f1e111]: Angular
+            - listitem [ref=f1e112]: Tailwind
+            - listitem [ref=f1e113]: TypeScript
+        - generic [ref=f1e114]:
+          - generic [ref=f1e115]: Backend
+          - list [ref=f1e116]:
+            - listitem [ref=f1e117]: NestJS
+            - listitem [ref=f1e118]: Node.js
+            - listitem [ref=f1e119]: PostgreSQL
+            - listitem [ref=f1e120]: MongoDB
+            - listitem [ref=f1e121]: REST
+        - generic [ref=f1e122]:
+          - generic [ref=f1e123]: DevOps & outils
+          - list [ref=f1e124]:
+            - listitem [ref=f1e125]: Docker
+            - listitem [ref=f1e126]: GitLab CI/CD
+            - listitem [ref=f1e127]: Vercel
+            - listitem [ref=f1e128]: Linux
+            - listitem [ref=f1e129]: Aws
+            - listitem [ref=f1e130]: Ansible
+    - generic [ref=f1e132]:
+      - generic [ref=f1e134]:
+        - generic [ref=f1e135]: 03 / Parcours
+        - heading "Expérience" [level=2] [ref=f1e136]
+      - generic [ref=f1e137]:
+        - generic [ref=f1e138]:
+          - generic [ref=f1e139]:
+            - generic [ref=f1e140]: 2022 — aujourd'hui
+            - generic [ref=f1e141]: Cotonou, Bénin
+          - generic [ref=f1e142]:
+            - heading "Développeur full-stack · Digit Consults" [level=3] [ref=f1e143]
+            - paragraph [ref=f1e144]: Conception et livraison de produits web pour des clients en Afrique de l'Ouest. Stack moderne, CI/CD, déploiements automatisés.
+            - generic [ref=f1e145]:
+              - generic [ref=f1e146]: Next.js
+              - generic [ref=f1e147]: NestJS
+              - generic [ref=f1e148]: DevOps
+        - generic [ref=f1e149]:
+          - generic [ref=f1e150]:
+            - generic [ref=f1e151]: "2023"
+            - generic [ref=f1e152]: Mission
+          - generic [ref=f1e153]:
+            - heading "Développeur frontend Angular · Le Baromètre" [level=3] [ref=f1e154]
+            - paragraph [ref=f1e155]: Construction d'une interface de visualisation de données et de tableaux de bord pour une plateforme d'analyse politique.
+            - generic [ref=f1e156]:
+              - generic [ref=f1e157]: Angular
+              - generic [ref=f1e158]: RxJS
+              - generic [ref=f1e159]: D3
+        - generic [ref=f1e160]:
+          - generic [ref=f1e161]:
+            - generic [ref=f1e162]: 2022 — 2023
+            - generic [ref=f1e163]: Mission
+          - generic [ref=f1e164]:
+            - heading "Développeur frontend Angular · Agrosfer" [level=3] [ref=f1e165]
+            - paragraph [ref=f1e166]: Développement de l'interface web d'une plateforme agricole — catalogue, commandes, suivi logistique.
+            - generic [ref=f1e167]:
+              - generic [ref=f1e168]: Angular
+              - generic [ref=f1e169]: TypeScript
+              - generic [ref=f1e170]: REST
+    - generic [ref=f1e172]:
+      - generic [ref=f1e173]:
+        - generic [ref=f1e174]: 04 / Contact
+        - heading "Travaillons ensemble." [level=2] [ref=f1e175]
+        - paragraph [ref=f1e176]: Disponible pour des missions full-stack, du conseil technique ou simplement une discussion autour d'un produit. Je réponds en moins de 24h.
+        - link "sekpaliguidime@gmail.com" [ref=f1e177] [cursor=pointer]:
+          - /url: mailto:sekpaliguidime@gmail.com
+        - generic [ref=f1e178]:
+          - link "LinkedIn" [ref=f1e179] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/socrates-ekpaliguidime-4b728119a
+            - text: LinkedIn
+            - generic [aria-hidden] [ref=f1e180]: ↗
+          - link "X / Twitter" [ref=f1e181] [cursor=pointer]:
+            - /url: https://x.com/ekpaliguidime
+            - text: X / Twitter
+            - generic [aria-hidden] [ref=f1e182]: ↗
+          - link "Github" [ref=f1e183] [cursor=pointer]:
+            - /url: https://github.com/Socrates-maker
+            - text: Github
+            - generic [aria-hidden] [ref=f1e184]: ↗
+          - link "Gitlab" [ref=f1e185] [cursor=pointer]:
+            - /url: https://gitlab.com/sekpaliguidime
+            - text: Gitlab
+            - generic [aria-hidden] [ref=f1e186]: ↗
+      - generic [ref=f1e188]:
+        - generic [ref=f1e189]:
+          - generic [ref=f1e190]: Nom
+          - textbox "Nom" [ref=f1e191]:
+            - /placeholder: Votre nom
+        - generic [ref=f1e192]:
+          - generic [ref=f1e193]: E-mail
+          - textbox "E-mail" [ref=f1e194]:
+            - /placeholder: vous@exemple.com
+        - generic [ref=f1e195]:
+          - generic [ref=f1e196]: Message
+          - textbox "Message" [ref=f1e197]:
+            - /placeholder: Parlez-moi de votre projet…
+        - button "Envoyer le message →" [ref=f1e198] [cursor=pointer]
+  - contentinfo [ref=f1e199]:
+    - generic [ref=f1e200]:
+      - generic [ref=f1e201]: © 2026 Socrates Ekpaliguidime
+      - generic [ref=f1e202]: Conçu et développé par Socrates Ekpaliguidime
+  - button "Open Next.js Dev Tools" [ref=f1e208] [cursor=pointer]

@@ -1,31 +1,23 @@
 import type { Metadata } from "next";
-import { Zilla_Slab, Public_Sans, Courier_Prime } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
-import { InkFilters } from "@/components/ink-filters";
 
-const zillaSlab = Zilla_Slab({
-  variable: "--font-zilla-slab",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
-const publicSans = Public_Sans({
-  variable: "--font-public-sans",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const courierPrime = Courier_Prime({
-  variable: "--font-courier-prime",
-  subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -46,15 +38,14 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} data-theme="light" suppressHydrationWarning>
+    <html lang={locale} data-theme="dark" suppressHydrationWarning>
       <body
-        className={`${zillaSlab.variable} ${publicSans.variable} ${courierPrime.variable} paper-grid bg-bg text-fg font-sans text-base leading-[1.55] antialiased [text-rendering:optimizeLegibility] transition-colors duration-[350ms]`}
+        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-bg text-fg font-sans text-[17px] leading-[1.55] antialiased overflow-x-clip transition-colors duration-200`}
       >
-        <InkFilters />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider
             attribute="data-theme"
-            defaultTheme="light"
+            defaultTheme="dark"
             enableSystem={false}
             disableTransitionOnChange
           >

@@ -38,6 +38,12 @@ export const skillGroups = pgTable("skill_groups", {
   items: text("items").array().notNull().default([]),
 });
 
+/** Single-value site settings (e.g. the CV file URL), keyed by name. */
+export const settings = pgTable("settings", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull(),
+});
+
 export type Project = typeof projects.$inferSelect;
 export type NewProject = typeof projects.$inferInsert;
 export type Experience = typeof experiences.$inferSelect;

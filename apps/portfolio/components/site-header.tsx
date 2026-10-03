@@ -7,165 +7,208 @@ import { useLocale, useTranslations } from "next-intl";
 import { LANG_COOKIE, type Locale } from "@/lib/locale";
 import { SITE } from "@/lib/site";
 
-const TB_BTN =
-  "appearance-none bg-transparent border border-on-cover/30 text-on-cover h-8 px-2.5 rounded-[3px] font-mono text-[11px] leading-none tracking-[0.04em] uppercase cursor-pointer inline-flex items-center gap-1.5 transition-colors hover:bg-gold-on-cover/16 hover:border-gold-on-cover focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold-on-cover focus-visible:outline-offset-2 max-phone:h-10 max-phone:px-2";
+const ICON_BTN =
+  "items-center justify-center w-11 h-11 rounded-full border border-line bg-transparent text-fg cursor-pointer transition-colors hover:bg-fg/5 focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2";
 
-export function SiteHeader() {
-  const t = useTranslations();
+const LOCALES: Locale[] = ["fr", "en"];
+
+export function SiteHeader({ cvUrl }: { cvUrl: string | null }) {
+  const t = useTranslations("nav");
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
-  const isDark = mounted && resolvedTheme === "dark";
-  const otherLocale: Locale = locale === "fr" ? "en" : "fr";
+  // Before mount we don't know the stored theme; assume the default (dark).
+  const isDark = !mounted || resolvedTheme === "dark";
   const isWorkPage = pathname === "/work";
 
-  const toggleLang = () => {
-    document.cookie = `${LANG_COOKIE}=${otherLocale}; path=/; max-age=31536000; samesite=lax`;
+  const setLocale = (next: Locale) => {
+    if (next === locale) return;
+    document.cookie = `${LANG_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
     router.refresh();
   };
 
   // On the dedicated /work page there's no #experience/#skills/#contact
   // section to jump to, so those links need to go back to the home page
   // first. "Work" itself just marks as active — it already is the page.
+  const prefix = isWorkPage ? "/" : "";
   const navLinks = [
-    { href: isWorkPage ? "/work" : "#work", label: t("nav.work"), active: isWorkPage },
-    { href: isWorkPage ? "/#experience" : "#experience", label: t("nav.experience"), active: false },
-    { href: isWorkPage ? "/#skills" : "#skills", label: t("nav.skills"), active: false },
-    { href: isWorkPage ? "/#contact" : "#contact", label: t("nav.contact"), active: false },
+    { href: `${prefix}#top`, label: t("home"), active: false },
+    {
+      href: isWorkPage ? "/work" : "#work",
+      label: t("work"),
+      active: isWorkPage,
+    },
+    { href: `${prefix}#skills`, label: t("skills"), active: false },
+    { href: `${prefix}#experience`, label: t("experience"), active: false },
+    { href: `${prefix}#contact`, label: t("contact"), active: false },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-cover text-on-cover border-b-[3px] border-double border-gold-on-cover">
-      <div className="flex items-center justify-between gap-6 h-16 w-[var(--col)] mx-auto max-phone:gap-2.5">
+    <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
+      <nav className="max-w-[1200px] mx-auto px-6 py-5 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 max-[960px]:flex max-[960px]:justify-between max-[640px]:px-4 max-[640px]:py-3.5">
         <a
-          href="#top"
-          className="flex items-center gap-[10px] font-serif text-base font-bold tracking-[0.02em] uppercase no-underline text-on-cover"
+          href={isWorkPage ? "/" : "#top"}
+          aria-label={SITE.brand}
+          className="flex items-center gap-2.5 shrink-0 no-underline font-mono text-[15px] font-medium"
         >
           <span
-            className="w-[26px] h-[26px] rounded-full border-[1.5px] border-gold-on-cover flex items-center justify-center font-serif text-xs font-bold text-gold-on-cover shrink-0"
+            className="inline-flex w-9 h-9 items-center justify-center rounded-lg bg-accent text-on-accent font-extrabold text-[18px]"
             aria-hidden="true"
           >
             {SITE.nameFirst.charAt(0)}
+            {SITE.nameLast.charAt(0)}
           </span>
-          <span>{SITE.brandShort}</span>
+          <span className="max-[480px]:hidden uppercase font-bold text-[18px]">
+            {SITE.brandShort}
+          </span>
         </a>
 
-        <nav className="flex gap-1 max-phone:hidden" aria-label="Primary">
+        <div className="flex items-center justify-center gap-x-2 text-[15px] max-[960px]:hidden">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               aria-current={link.active ? "page" : undefined}
-              className={`font-mono text-xs leading-none tracking-[0.06em] uppercase no-underline px-3.5 py-2.5 border transition-colors hover:text-on-cover hover:border-gold-on-cover/50 hover:bg-gold-on-cover/10 ${
-                link.active
-                  ? "text-on-cover border-gold-on-cover/50 bg-gold-on-cover/10"
-                  : "text-on-cover/72 border-transparent"
-              }`}
+              className="px-3 py-2.5 whitespace-nowrap no-underline transition-opacity hover:opacity-75 aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8"
             >
               {link.label}
             </a>
           ))}
-        </nav>
+        </div>
 
-        <div className="flex items-center gap-1.5 max-phone:gap-1">
-          <button
-            type="button"
-            className={TB_BTN}
-            onClick={toggleLang}
-            aria-label="Switch language"
+        <div className="flex justify-self-end items-center gap-2">
+          <div
+            role="group"
+            aria-label={t("language")}
+            className="inline-flex p-[3px] border border-line rounded-full font-mono text-[13px]"
           >
-            <span className="text-on-cover">{locale.toUpperCase()}</span>
-            <span className="text-gold-on-cover">/</span>
-            <span className="text-on-cover/55">{otherLocale.toUpperCase()}</span>
-          </button>
+            {LOCALES.map((l) => (
+              <button
+                key={l}
+                type="button"
+                aria-pressed={locale === l}
+                onClick={() => setLocale(l)}
+                className="min-w-11 min-h-[38px] px-2.5 border-0 rounded-full bg-transparent text-fg font-medium cursor-pointer aria-pressed:bg-fg aria-pressed:text-bg focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
           <button
             type="button"
-            className={`${TB_BTN} w-8 px-0 justify-center max-phone:w-10`}
+            className={`${ICON_BTN} inline-flex`}
             onClick={() => setTheme(isDark ? "light" : "dark")}
-            aria-label="Toggle theme"
+            aria-label={isDark ? t("toLight") : t("toDark")}
+            title={isDark ? t("toLight") : t("toDark")}
             suppressHydrationWarning
           >
             {isDark ? (
               <svg
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth={1.6}
+                strokeWidth={1.8}
                 strokeLinecap="round"
-                className="w-3.5 h-3.5"
+                strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.8}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
               </svg>
             )}
           </button>
+
           <button
             type="button"
-            className={`${TB_BTN} w-8 px-0 justify-center max-phone:w-10 hidden max-phone:inline-flex`}
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
+            className={`${ICON_BTN} hidden max-[960px]:inline-flex`}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? t("closeMenu") : t("openMenu")}
+            aria-expanded={menuOpen}
             aria-controls="mobile-nav"
           >
-            {mobileOpen ? (
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-                strokeLinecap="round"
-                className="w-3.5 h-3.5"
-              >
-                <path d="M5 5l14 14M19 5L5 19" />
-              </svg>
-            ) : (
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.6}
-                strokeLinecap="round"
-                className="w-3.5 h-3.5"
-              >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.8}
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              {menuOpen ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
                 <path d="M4 7h16M4 12h16M4 17h16" />
-              </svg>
-            )}
+              )}
+            </svg>
           </button>
-        </div>
-      </div>
 
-      <nav
-        id="mobile-nav"
-        aria-label="Primary mobile"
-        className="hidden max-phone:data-[open=true]:block bg-cover border-t border-gold-on-cover/40"
-        data-open={mobileOpen}
-      >
-        <div className="w-[var(--col)] mx-auto flex flex-col">
+          {cvUrl && (
+            <a
+              href={cvUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="ml-2 inline-flex justify-center whitespace-nowrap no-underline px-3.5 py-2.5 border border-fg rounded-full font-mono text-sm transition-colors hover:bg-fg hover:text-bg max-[960px]:hidden"
+            >
+              {t("cv")}
+            </a>
+          )}
+        </div>
+      </nav>
+
+      {menuOpen && (
+        <div
+          id="mobile-nav"
+          className="hidden max-[960px]:flex flex-col px-4 pt-2 pb-5 border-t border-line text-xl font-medium"
+        >
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={() => setMobileOpen(false)}
+              onClick={() => setMenuOpen(false)}
               aria-current={link.active ? "page" : undefined}
-              className={`flex items-center gap-[10px] py-4 px-1 font-mono text-[13px] uppercase tracking-[0.05em] no-underline border-b border-on-cover/15 last:border-b-0 hover:text-on-cover ${
-                link.active ? "text-on-cover" : "text-on-cover/80"
-              }`}
+              className="flex items-center min-h-[52px] no-underline border-b border-line"
             >
               {link.label}
             </a>
           ))}
+          {cvUrl && (
+            <a
+              href={cvUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center justify-center min-h-[52px] mt-4 no-underline border border-fg rounded-full font-mono text-[15px]"
+            >
+              {t("cv")}
+            </a>
+          )}
         </div>
-      </nav>
+      )}
     </header>
   );
 }

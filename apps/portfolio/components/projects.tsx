@@ -2,44 +2,53 @@ import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/locale";
 import { getFeaturedProjects } from "@/lib/db/queries";
-import { Reveal } from "@/components/reveal";
-import { ProjectList } from "@/components/project-list";
+import { Reveal, RevealList } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { FeaturedProjectCard, ProjectCard } from "@/components/project-card";
 
 export async function Projects() {
   const t = await getTranslations();
   const locale = (await getLocale()) as Locale;
-  const projects = await getFeaturedProjects();
+  const [featured, ...rest] = await getFeaturedProjects();
+  const labels = {
+    visit: t("ui.visitSite"),
+    screenshot: t.raw("ui.screenshot") as string,
+    featured: t("sections.featured"),
+  };
 
   return (
-    <section className="w-[var(--col)] mx-auto" id="work">
-      <Reveal
-        as="div"
-        className="grid grid-cols-[200px_1fr] gap-[clamp(16px,3vw,48px)] max-phone:text-center items-baseline pb-[clamp(28px,4vh,48px)] border-b-2 border-cover max-phone:grid-cols-1"
-      >
-        <h2 className="font-serif  font-semibold tracking-[-0.006em] text-[clamp(24px,3.2vw,36px)] leading-[1.1] max-w-[28ch] text-fg">
-          {t("sections.workTitle")}
-        </h2>
-        <p className="col-start-3 self-center max-phone:col-start-1 text-fg-muted text-sm font-sans">
-          {t("sections.workIntro")}
-        </p>
-      </Reveal>
-
-      <ProjectList
-        projects={projects}
-        locale={locale}
-        visitLabel={t("ui.visitSite")}
-      />
-
-      <div className="flex justify-end max-phone:justify-center pt-[clamp(20px,3vh,28px)]">
-        <Link
-          href="/work"
-          className="group/all inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-stamp no-underline px-4 py-2.5 border border-stamp rounded-sm transition-colors duration-200 hover:bg-stamp hover:text-on-stamp focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2"
+    <section id="work" className="border-t border-line">
+      <div className="max-w-[1200px] mx-auto px-6 py-[88px] flex flex-col gap-12 max-[640px]:px-4 max-[640px]:py-14 max-[640px]:gap-8">
+        <Reveal
+          as="div"
+          className="flex flex-wrap justify-between items-end gap-4 max-[960px]:flex-col max-[960px]:items-center max-[960px]:text-center"
         >
-          {t("ui.viewAllProjects")}
-          {/*
-          <ExternalArrowIcon className="w-3.5 h-3.5 inline-block transition-transform duration-200 group-hover/all:translate-x-[2px] group-hover/all:-translate-y-[2px]" />
-*/}
-        </Link>
+          <SectionHeading
+            eyebrow={t("sections.workEyebrow")}
+            title={t("sections.workTitle")}
+            className="max-[960px]:items-center"
+          />
+          <Link href="/work" className="font-mono text-sm py-3 hover:opacity-75">
+            {t("ui.viewAllProjects")}
+          </Link>
+        </Reveal>
+
+        {featured && (
+          <Reveal as="div">
+            <FeaturedProjectCard project={featured} locale={locale} labels={labels} />
+          </Reveal>
+        )}
+
+        {rest.length > 0 && (
+          <RevealList
+            className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-6"
+            staggerMs={80}
+          >
+            {rest.map((p) => (
+              <ProjectCard key={p.id} project={p} locale={locale} labels={labels} />
+            ))}
+          </RevealList>
+        )}
       </div>
     </section>
   );

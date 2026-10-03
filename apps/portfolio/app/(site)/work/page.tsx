@@ -3,9 +3,9 @@ import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/locale";
 import { getProjects } from "@/lib/db/queries";
-import { Reveal } from "@/components/reveal";
-import { ProjectList } from "@/components/project-list";
-import { ArrowIcon } from "@/components/icons/arrow-icon";
+import { Reveal, RevealList } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { ProjectCard } from "@/components/project-card";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -16,35 +16,33 @@ export default async function WorkPage() {
   const t = await getTranslations();
   const locale = (await getLocale()) as Locale;
   const projects = await getProjects();
+  const labels = {
+    visit: t("ui.visitSite"),
+    screenshot: t.raw("ui.screenshot") as string,
+  };
 
   return (
-    <section className="w-[var(--col)] mx-auto py-[var(--section-y)]">
-      <Reveal
-        as="div"
-        className="grid grid-cols-[200px_1fr] gap-[clamp(16px,3vw,48px)] items-baseline pb-[clamp(28px,4vh,48px)] border-b-2 border-cover max-phone:grid-cols-1"
-      >
-        <h1 className="font-serif font-semibold tracking-[-0.006em] text-[clamp(24px,3.2vw,36px)] leading-[1.1] max-w-[28ch] text-fg">
-          {t("sections.allWorkTitle")}
-        </h1>
-        <div className="col-start-3 max-phone:col-start-1 flex flex-col gap-4">
-          <Link
-            href="/#work"
-            className="self-end inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.05em] text-fg-muted no-underline hover:text-fg"
-          >
-            <ArrowIcon className="w-3.5 h-3.5 rotate-180" />
-            {t("ui.backToHome")}
-          </Link>
-          <p className="text-fg-muted text-sm font-sans">
-            {t("sections.allWorkIntro")}
-          </p>
-        </div>
+    <section className="max-w-[1200px] mx-auto px-6 py-[88px] flex flex-col gap-12 max-[640px]:px-4 max-[640px]:py-14 max-[640px]:gap-8">
+      <Reveal as="div" className="flex flex-col gap-5">
+        <Link href="/#work" className="self-start font-mono text-sm text-muted no-underline hover:text-fg">
+          {t("ui.backToHome")}
+        </Link>
+        <SectionHeading
+          as="h1"
+          eyebrow={t("sections.workEyebrow")}
+          title={t("sections.allWorkTitle")}
+        />
+        <p className="m-0 max-w-[620px] text-muted">{t("sections.allWorkIntro")}</p>
       </Reveal>
 
-      <ProjectList
-        projects={projects}
-        locale={locale}
-        visitLabel={t("ui.visitSite")}
-      />
+      <RevealList
+        className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-6"
+        staggerMs={70}
+      >
+        {projects.map((p) => (
+          <ProjectCard key={p.id} project={p} locale={locale} labels={labels} />
+        ))}
+      </RevealList>
     </section>
   );
 }

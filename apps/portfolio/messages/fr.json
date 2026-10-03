@@ -4,47 +4,64 @@
     "description": "Portfolio de Socrates Ekpaliguidime — développeur logiciel full-stack basé à Cotonou, au Bénin."
   },
   "nav": {
+    "home": "Accueil",
     "work": "Projets",
+    "skills": "Compétences",
     "experience": "Parcours",
-    "skills": "Outils",
-    "contact": "Contact"
-  },
-  "header": {
-    "availability": "Ouvert aux missions · 2026"
+    "contact": "Contact",
+    "cv": "Voir mon CV ↗",
+    "language": "Langue",
+    "toLight": "Passer en mode clair",
+    "toDark": "Passer en mode sombre",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "hero": {
-    "eyebrow": "Cotonou, Bénin",
-    "role": "Developpeur Full-Stack  · Cloud & DevOps",
-    "roleAccent": "full-stack",
-    "bio": "Je suis développeur Full-Stack basé au Bénin ; je me consacre à la création d'applications web modernes tout en me spécialisant progressivement dans l'ingénierie Cloud et le DevOps.\n\nJe conçois des applications web et des produits numériques fiables,\ncouvrant l'ensemble du cycle, des interfaces frontend et des API jusqu'au CI/CD et au déploiement dans le cloud.",
-    "footnote": "Physique appliquée → ingénierie logicielle.",
-    "ctaPrimary": "Me contacter",
-    "ctaSecondary": "Voir les projets",
-    "photoCaption": "Photo · 2025"
+    "role": "Développeur full‑stack · Cloud & DevOps",
+    "bio": "Basé au Bénin, je conçois des applications web modernes et fiables — des interfaces et API jusqu'au CI/CD et au déploiement dans le cloud — tout en me spécialisant progressivement dans l'ingénierie Cloud et le DevOps.",
+    "ctaPrimary": "Voir mes projets →",
+    "ctaSecondary": "Me contacter",
+    "photoAlt": "Portrait de Socrates Ekpaliguidime",
+    "avatarAlt": "Avatar illustré de Socrates Ekpaliguidime",
+    "badge": "Disponible pour collaborer",
+    "tag": "Full-stack · Cloud"
   },
   "sections": {
-    "workTitle": "Projets récents",
-    "workIntro": "Quelques produits sur lesquels j'ai eu plaisir à travailler ces dernières années.",
+    "workEyebrow": "01 / Projets",
+    "workTitle": "Travaux sélectionnés",
+    "featured": "Projet vedette",
     "allWorkTitle": "Tous les projets",
     "allWorkIntro": "La liste complète — tout ce que j'ai livré, pas seulement les temps forts.",
-    "experienceTitle": "Là où j'ai construit",
-    "skillsTitle": "Avec quoi je travaille",
+    "skillsEyebrow": "02 / Compétences",
+    "skillsTitle": "Ma boîte à outils",
     "skillsIntro": "Pas une liste exhaustive — ce que j'utilise au quotidien, en confiance.",
-    "contactTitle": "On construit quelque chose ensemble ?",
+    "experienceEyebrow": "03 / Parcours",
+    "experienceTitle": "Expérience",
+    "contactEyebrow": "04 / Contact",
+    "contactTitle": "Travaillons ensemble.",
     "contactBody": "Disponible pour des missions full-stack, du conseil technique ou simplement une discussion autour d'un produit. Je réponds en moins de 24h."
   },
+  "contactForm": {
+    "name": "Nom",
+    "namePlaceholder": "Votre nom",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "message": "Message",
+    "messagePlaceholder": "Parlez-moi de votre projet…",
+    "send": "Envoyer le message →",
+    "sending": "Envoi…",
+    "success": "Message envoyé — je vous réponds sous 24h.",
+    "invalid": "Merci de remplir votre nom, un e-mail valide et votre message.",
+    "failed": "L'envoi a échoué. Réessayez ou écrivez-moi directement par e-mail."
+  },
   "footer": {
-    "copy": "© 2026 Socrates Ekpaliguidime. Conçu avec soin."
+    "copy": "© 2026 Socrates Ekpaliguidime",
+    "madeBy": "Conçu et développé par Socrates Ekpaliguidime"
   },
   "ui": {
-    "visitSite": "Voir le site",
-    "viewAllProjects": "Voir tous les projets",
-    "backToHome": "Retour à l'accueil",
-    "fieldName": "Nom",
-    "fieldProfession": "Profession",
-    "fieldLocation": "Lieu",
-    "fieldRemarks": "Remarques",
-    "fieldPriorField": "Domaine antérieur",
-    "entryLabel": "Entrée"
+    "visitSite": "Voir le site ↗",
+    "viewAllProjects": "Voir tous les projets →",
+    "backToHome": "← Retour à l'accueil",
+    "screenshot": "Capture de {title}"
   }
 }

@@ -2,67 +2,53 @@ import { getLocale, getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/locale";
 import { getExperiences } from "@/lib/db/queries";
 import { Reveal, RevealList } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
 
 export async function Experience() {
-  const t = await getTranslations();
+  const t = await getTranslations("sections");
   const locale = (await getLocale()) as Locale;
   const experiences = await getExperiences();
-  const total = experiences.length;
 
   return (
-    <section className="w-[var(--col)] mx-auto" id="experience">
-      <Reveal
-        as="div"
-        className="grid grid-cols-[200px_1fr] gap-[clamp(16px,3vw,48px)] items-baseline pb-[clamp(28px,4vh,48px)] border-b-2 border-cover max-phone:grid-cols-1 max-phone:text-center"
-      >
-        <h2 className="font-serif font-semibold tracking-[-0.006em] text-[clamp(24px,3.2vw,36px)] leading-[1.1] max-w-[28ch] text-fg">
-          {t("sections.experienceTitle")}
-        </h2>
-      </Reveal>
+    <section id="experience" className="border-t border-line">
+      <div className="max-w-[1200px] mx-auto px-6 py-[88px] flex flex-col gap-10 max-[640px]:px-4 max-[640px]:py-14 max-[640px]:gap-8">
+        <Reveal as="div" className="max-[960px]:flex max-[960px]:justify-center max-[960px]:text-center">
+          <SectionHeading
+            eyebrow={t("experienceEyebrow")}
+            title={t("experienceTitle")}
+            className="max-[960px]:items-center"
+          />
+        </Reveal>
 
-      <RevealList
-        className="flex flex-col border-t border-dashed border-hairline-strong"
-        staggerMs={90}
-      >
-        {experiences.map((e, i) => (
-          <div
-            key={e.company}
-            className="grid grid-cols-[150px_1fr_160px] gap-[clamp(16px,3vw,40px)] py-[clamp(24px,3.6vh,36px)] px-2 border-b border-dashed border-hairline-strong items-baseline max-tablet:grid-cols-1 max-tablet:gap-2"
-          >
-            <div className="font-mono text-[11px] tracking-[0.04em] text-gold font-bold max-tablet:order-first">
-              {e.period[locale]}
-            </div>
-            <div>
-              <h3 className="font-serif font-semibold text-[clamp(20px,2.4vw,26px)] tracking-[-0.005em] leading-[1.15] text-fg">
-                {e.company}
-              </h3>
-              <div className="font-sans font-medium text-fg-muted mt-1 text-sm">
-                {e.role[locale]}
+        <RevealList className="flex flex-col border-b border-line" staggerMs={90}>
+          {experiences.map((e) => (
+            <div
+              key={e.id}
+              className="flex flex-wrap gap-x-10 gap-y-2 py-7 border-t border-line max-[640px]:flex-col max-[640px]:gap-1.5 max-[640px]:py-[22px]"
+            >
+              <div className="flex-[0_0_180px] flex flex-col gap-1 font-mono text-sm text-muted max-[640px]:flex-auto">
+                <span>{e.period[locale]}</span>
+                <span className="text-[13px]">{e.location[locale]}</span>
               </div>
-              <p className="font-sans text-[13.5px] text-fg-muted mt-3 max-w-[56ch] leading-[1.6]">
-                {e.summary[locale]}
-              </p>
-              <div className="flex flex-wrap gap-1.5 mt-3">
-                {e.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-[10px] leading-none tracking-[0.04em] text-fg-muted px-2 py-1 border border-hairline-strong rounded-sm bg-bg-2"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div className="flex-[1_1_420px] min-w-0 flex flex-col gap-1.5 max-[640px]:flex-auto">
+                <h3 className="m-0 text-[22px] font-bold">
+                  {e.role[locale]} · {e.company}
+                </h3>
+                <p className="m-0 text-muted">{e.summary[locale]}</p>
+                {e.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2 font-mono text-xs">
+                    {e.tags.map((tag) => (
+                      <span key={tag} className="px-2.5 py-1.5 border border-line rounded-md text-muted">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-            <div className="flex flex-col gap-1.5 font-mono text-[10px] text-fg-soft tracking-[0.06em] uppercase text-right max-tablet:flex-row max-tablet:flex-wrap max-tablet:gap-x-3 max-tablet:gap-y-1 max-tablet:text-left max-tablet:mt-1">
-              <span>{e.location[locale]}</span>
-              {/* <span>
-                {t("ui.entryLabel")} {String(i + 1).padStart(2, "0")} /{" "}
-                {String(total).padStart(2, "0")}
-              </span>*/}
-            </div>
-          </div>
-        ))}
-      </RevealList>
+          ))}
+        </RevealList>
+      </div>
     </section>
   );
 }
